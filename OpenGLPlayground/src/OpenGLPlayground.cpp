@@ -1,8 +1,28 @@
-/* OpenGLPlayground.cpp
-*
-* Author: Lonnie Souder II
-* Date:   07/25/2019
-*/
+/**
+ * @file OpenGLPlayground.cpp
+ * @mainpage OpenGL Playground
+ *
+ * @section Summary
+ * This project serves as a sandbox in which to learn and practice OpenGL
+ * 
+ * @section Main Topics
+ * The focus of these exercises will be in understanding high-performance
+ * computing and some computer graphics, thus the topics will include:
+ * - Compute Shaders
+ * - Multi-pass rendering
+ * - Fluid simulation on the GPU
+ *
+ * @section My Method
+ * Everything will be done the hard way first (i.e. type out ALLL the code).
+ * Functionality will only be abstracted to a class or function when it is
+ * fully understood. As a test, when abstracting, I will not be looking at
+ * the code that I am *essentially* copying. This should give me one last
+ * chance to type out the code while focusing on what it does and how it
+ * works--and of course this is also good for memory.
+ *
+ * @author Lonnie L. Souder II
+ * @date 07/31/2019
+ */
 #include "pch.h"
 
 #include <iostream>

@@ -1,8 +1,25 @@
+/**
+ * @file ShaderUtilities.h
+ * 
+ * Contains a set of functions helpful for loading, compiling, and linking shaders.
+ *
+ * @author Lonnie L. Souder II
+ * @date 07/31/2019
+ */
+
 #pragma once
 
 #include <GL/glew.h>
 #include <string>
 
+/**
+ * @defgroup LSShaderUtilities Shader Utilities
+ * @{
+ */
+
+/**
+ * Contains a set of functions that are helpfule for loading compiling and linking shaders.
+ */
 namespace LSShaderUtilities
 {
   /**
@@ -26,3 +43,5 @@ namespace LSShaderUtilities
  */
   GLuint LoadShader(const std::string& FilePath);
 }
+
+/** @} */
