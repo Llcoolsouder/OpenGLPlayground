@@ -7,8 +7,11 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <algorithm>
 
-
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 std::string LSShaderUtilities::LoadFile(const std::string& FilePath)
 {
   std::ifstream File(FilePath);
@@ -24,6 +27,8 @@ std::string LSShaderUtilities::LoadFile(const std::string& FilePath)
   return FileContents;
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 GLuint LSShaderUtilities::LoadShader(const std::string& FilePath)
 {
   std::size_t extensionPos = FilePath.rfind('.');
@@ -86,4 +91,33 @@ GLuint LSShaderUtilities::LoadShader(const std::string& FilePath)
     }
   }
   return ShaderID;  
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+GLuint LSShaderUtilities::LinkProgram(std::vector<GLuint> ShaderIDs)
+{
+  GLuint ProgramID = glCreateProgram();
+  std::for_each(
+    ShaderIDs.begin(),
+    ShaderIDs.end(),
+    [&](const GLuint& ShaderID) {glAttachShader(ProgramID, ShaderID); });
+  glLinkProgram(ProgramID);
+
+  GLint LinkerStatus;
+  glGetObjectParameterivARB(ProgramID, GL_LINK_STATUS, &LinkerStatus);
+  if (!LinkerStatus)
+  {
+    GLint LogLength,
+      dummy;
+    glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &LogLength);
+    if (LogLength > 1)
+    {
+      GLchar* InfoLog = new GLchar[LogLength];
+      glGetProgramInfoLog(ProgramID, LogLength, &dummy, InfoLog);
+      std::cerr << InfoLog << std::endl;
+      delete InfoLog;
+    }
+  }
+  return ProgramID;
 }
