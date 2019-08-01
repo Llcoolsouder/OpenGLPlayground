@@ -1,8 +1,8 @@
 /**
- * @file bouncing_particles.comp
+ * @file particle_attraction.comp
  * 
  * Compute shader which updates positions and velocities
- * of falling particles which bounce when they hit a floor plane
+ * of falling particles with multiple external forces
  *
  * @author Lonnie L. Souder II
  * @date 08/01/2019

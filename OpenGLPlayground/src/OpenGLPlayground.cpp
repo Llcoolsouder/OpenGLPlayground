@@ -36,8 +36,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "ShaderUtilities.h"
+#include "Camera.h"
 
 void cleanup()
 {
@@ -62,7 +64,8 @@ int main()
     return -1;
   }
 
-  window = glfwCreateWindow(1024, 768, "OpenGL Playground", NULL, NULL);
+
+  window = glfwCreateWindow(960, 512, "OpenGL Playground", NULL, NULL);
   glfwMakeContextCurrent(window);
 
   if (glewInit() != GLEW_OK)
@@ -117,7 +120,9 @@ int main()
   glEnableVertexAttribArray(0);
 
   // Compute Shader setup
-  const unsigned int NUM_PARTICLES = 256 * 1024;
+  const unsigned int NUM_PARTICLES = 1024 * 1024;
+  const unsigned int WORK_GROUP_SIZE = 1024;
+  const GLuint NUM_WORK_GROUPS = NUM_PARTICLES / WORK_GROUP_SIZE;
   GLint BufMask = GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT;
 
   GLuint computePosBufID;
@@ -168,9 +173,6 @@ int main()
   glDeleteShader(ComputeShader);
   ComputeShaderIDs.clear();
 
-  const unsigned int WORK_GROUP_SIZE = 1024;
-  const GLuint NUM_WORK_GROUPS = NUM_PARTICLES / WORK_GROUP_SIZE;
-
   // Timer
   std::chrono::system_clock::time_point FrameStart;
   float deltaTime = 0.0f;
@@ -178,25 +180,38 @@ int main()
   const float zero = 0.0f;
 
   // Shader Const uniforms
-  glm::vec4 particle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+  glm::vec4 particle_uColor = { 1.0f, 0.0f, 1.0f, 1.0f };
   glm::vec4 triangle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+  // Camera Setup
+  glm::mat4 viewMat = glm::mat4(1.0f);
+  glm::mat4 projMat = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.01f, 100.0f);
+  Camera mainCamera(viewMat, projMat);
+
+  glUseProgram(ShaderProgramID);
+  glUniformMatrix4fv(
+    glGetUniformLocation(ShaderProgramID, "uViewMatrix"), 
+    1, GL_FALSE, (GLfloat*)&mainCamera.GetViewMatrix());
+  glUniformMatrix4fv(
+    glGetUniformLocation(ShaderProgramID, "uProjMatrix"),
+    1, GL_FALSE, (GLfloat*)&mainCamera.GetProjMatrix());
 
   while (!glfwWindowShouldClose(window))
   {
     FrameStart = std::chrono::system_clock::now();
 
-    //particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
-    //particle_uColor.b = 0.5f * (std::cos(uTime) + 1);
+    particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
+    particle_uColor.b = 0.5f * (std::cos(3 * uTime) + 1);
 
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Compute particles
+    glUseProgram(ComputeProgramID);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 4, computePosBufID);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 5, computeVelBufID);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 6, computeColorBufID);
-    glUseProgram(ComputeProgramID);
     glUniform1fv(glGetUniformLocation(ComputeProgramID, "dT"), 1, &deltaTime);
-    glDispatchCompute(NUM_WORK_GROUPS, 1, 1);
+    glDispatchComputeGroupSizeARB(NUM_WORK_GROUPS, 1, 1, WORK_GROUP_SIZE, 1, 1);
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
     // Draw particles

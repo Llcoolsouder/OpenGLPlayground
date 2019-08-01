@@ -9,6 +9,15 @@
  */
 #version 430 core
 
+/** The camera projection matrix */
+uniform mat4 uProjMatrix = mat4(1.0f);
+
+/** The camera view matrix */
+uniform mat4 uViewMatrix = mat4(1.0f);
+
+/** The model matrix (specifies model position and orientation */
+uniform mat4 uModelMatrix = mat4(1.0f);
+
 /** A vec4 specifying the color of all vertices that pass through this shader */
 uniform vec4 uColor = vec4(1.0f, 1.0f, 1.0f, 1.0f); 
 
@@ -20,6 +29,6 @@ out vec4 vColor;
 
 void main()
 {
-	gl_Position = aPosition;
+	gl_Position = uProjMatrix * uViewMatrix * uModelMatrix * aPosition;
 	vColor = uColor;
 }
