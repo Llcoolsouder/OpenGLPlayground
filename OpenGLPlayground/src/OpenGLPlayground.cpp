@@ -128,7 +128,7 @@ int main()
   for (unsigned int i = 0; i < NUM_PARTICLES; i++)
   {
     ComputePoints[i].x = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 2.0f) - 1.0f;
-    ComputePoints[i].y = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 2.0f) - 1.0f;
+    ComputePoints[i].y = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 1.0f);
     ComputePoints[i].z = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 2.0f) - 1.0f;
     ComputePoints[i].w = 1.0f;
   }
@@ -162,7 +162,7 @@ int main()
   }
   glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 
-  GLuint ComputeShader = LSShaderUtilities::LoadShader(ShaderFolder + "particle.comp");
+  GLuint ComputeShader = LSShaderUtilities::LoadShader(ShaderFolder + "bouncing_particles.comp");
   std::vector<GLuint> ComputeShaderIDs = { ComputeShader };
   GLuint ComputeProgramID = LSShaderUtilities::LinkProgram(ComputeShaderIDs);
   glDeleteShader(ComputeShader);
@@ -178,15 +178,15 @@ int main()
   const float zero = 0.0f;
 
   // Shader Const uniforms
-  glm::vec4 particle_uColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+  glm::vec4 particle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
   glm::vec4 triangle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
 
   while (!glfwWindowShouldClose(window))
   {
     FrameStart = std::chrono::system_clock::now();
 
-    particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
-    particle_uColor.b = 0.5f * (std::cos(uTime) + 1);
+    //particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
+    //particle_uColor.b = 0.5f * (std::cos(uTime) + 1);
 
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -196,13 +196,11 @@ int main()
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 6, computeColorBufID);
     glUseProgram(ComputeProgramID);
     glUniform1fv(glGetUniformLocation(ComputeProgramID, "dT"), 1, &deltaTime);
-    std::cout << "uniform loc: " << glGetUniformLocation(ComputeProgramID, "dT") << std::endl;
     glDispatchCompute(NUM_WORK_GROUPS, 1, 1);
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
-    glUseProgram(ShaderProgramID);
-
     // Draw particles
+    glUseProgram(ShaderProgramID);
     glUniform4fv(glGetUniformLocation(ShaderProgramID, "uColor"), 1, (GLfloat*)&particle_uColor);
     glBindBuffer(GL_ARRAY_BUFFER, computePosBufID);
     glEnableVertexAttribArray(0);
@@ -210,10 +208,10 @@ int main()
     glDrawArrays(GL_POINTS, 0, NUM_PARTICLES);
 
     // Draw Triangle
-    glUniform4fv(glGetUniformLocation(ShaderProgramID, "uColor"), 1, (GLfloat*)&triangle_uColor);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    //glUniform4fv(glGetUniformLocation(ShaderProgramID, "uColor"), 1, (GLfloat*)&triangle_uColor);
+    //glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    //glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glUseProgram(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
