@@ -46,19 +46,19 @@ GLuint LSShaderUtilities::LoadShader(const std::string& FilePath)
   }
   
   GLenum ShaderType;
-  if (extension == ".vs")
+  if (extension == ".vert")
   {
     ShaderType = GL_VERTEX_SHADER;
   }
-  else if (extension == ".gs")
+  else if (extension == ".geo")
   {
     ShaderType = GL_GEOMETRY_SHADER;
   }
-  else if (extension == ".fs")
+  else if (extension == ".frag")
   {
     ShaderType = GL_FRAGMENT_SHADER;
   }
-  else if (extension == ".cs")
+  else if (extension == ".comp")
   {
     ShaderType = GL_COMPUTE_SHADER;
   }
