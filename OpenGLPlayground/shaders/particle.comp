@@ -1,42 +1,57 @@
+/**
+ * @file particle.comp
+ * 
+ * Compute shader which updates positions and velocities
+ * of falling particles with no other forces other than gravity
+ *
+ * @author Lonnie L. Souder II
+ * @date 08/01/2019
+ */
 #version 430 core
 
 layout (local_size_x = 1024, local_size_y = 1, local_size_z = 1) in;
 
+/** The buffer containing the positions of all of the particles */
 layout(std140, binding=4) buffer aPos
 {
     vec4 Positions[];
 };
 
+/** The buffer containing all the velocities of the particles */
 layout(std140, binding=5) buffer aVel
 {
     vec4 Velocities[];
 };
 
-layout(std140, binding=6) buffer aCol
-{
-    vec4 Colors[];
-};
-
+/** Uniform float specifying the time since the last frame */
 uniform float dT = 0.01f;
 
+/** Acceleration due to gravity */
+const vec3 G = vec3(0.0f, -9.8f, 0.0f);
 
-//----------------------------------------------------------
-//----------------------------------------------------------
+/** Slows or speeds up time */
+const float timeScale = 0.01f;
+
+/**
+ * @brief The main shader function.
+ *
+ * Computes new positions and velocities
+ * based on simple kinematic equations
+ */
 void main()
 {
-    float scaledDT = dT * 0.1f;
-    const vec3 G = vec3(0.0f, -9.8f, 0.0f);
+    float scaledDT = dT * timeScale;
 
     vec3 p = Positions[gl_GlobalInvocationID.x].xyz;
     vec3 v = Velocities[gl_GlobalInvocationID.x].xyz;
 
-    // p' = p + vt + 1/2 G t^2
+    /** p' = p + vt + 1/2 G t^2 */
     vec3 pp =
         p +
         (v * scaledDT) +
         (0.5f * scaledDT * scaledDT * G);
 
-    // v' = v + Gt
+    /** v' = v + Gt */
     vec3 vp =
         v +
         (G * scaledDT);
