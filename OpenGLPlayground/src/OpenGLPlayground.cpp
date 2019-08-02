@@ -32,6 +32,7 @@
 #include <algorithm>
 #include <chrono>
 #include <math.h>
+#include <tuple>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -64,8 +65,13 @@ int main()
     return -1;
   }
 
-
-  window = glfwCreateWindow(960, 512, "OpenGL Playground", NULL, NULL);
+  //Window creation
+  const std::tuple<float, float> AspectRatio = {16.0f, 9.0f};
+  const int WindowSize = 100;
+  window = glfwCreateWindow(
+    WindowSize * std::get<0>(AspectRatio),
+    WindowSize * std::get<1>(AspectRatio),
+    "OpenGL Playground", NULL, NULL);
   glfwMakeContextCurrent(window);
 
   if (glewInit() != GLEW_OK)
@@ -106,9 +112,10 @@ int main()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 
   const std::string ShaderFolder = "./shaders/";
-  GLuint VertexShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "solid.vert");
+  GLuint VertexShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "colored.vert");
+  GLuint GeomShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "point_to_circle.geom");
   GLuint FragmentShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "solid.frag");
-  std::vector<GLuint> ShaderIDs = { VertexShaderID, FragmentShaderID };
+  std::vector<GLuint> ShaderIDs = { VertexShaderID, GeomShaderID, FragmentShaderID };
   GLuint ShaderProgramID = LSShaderUtilities::LinkProgram(ShaderIDs);
   for_each(
     ShaderIDs.begin(),
@@ -133,7 +140,7 @@ int main()
   for (unsigned int i = 0; i < NUM_PARTICLES; i++)
   {
     ComputePoints[i].x = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 2.0f) - 1.0f;
-    ComputePoints[i].y = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 1.0f);
+    ComputePoints[i].y = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 2.0f) - 1.0f;
     ComputePoints[i].z = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 2.0f) - 1.0f;
     ComputePoints[i].w = 1.0f;
   }
@@ -167,7 +174,7 @@ int main()
   }
   glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 
-  GLuint ComputeShader = LSShaderUtilities::LoadShader(ShaderFolder + "bouncing_particles.comp");
+  GLuint ComputeShader = LSShaderUtilities::LoadShader(ShaderFolder + "particle_attraction.comp");
   std::vector<GLuint> ComputeShaderIDs = { ComputeShader };
   GLuint ComputeProgramID = LSShaderUtilities::LinkProgram(ComputeShaderIDs);
   glDeleteShader(ComputeShader);
@@ -180,28 +187,64 @@ int main()
   const float zero = 0.0f;
 
   // Shader Const uniforms
-  glm::vec4 particle_uColor = { 1.0f, 0.0f, 1.0f, 1.0f };
+  glm::vec4 particle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
   glm::vec4 triangle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
 
   // Camera Setup
-  glm::mat4 viewMat = glm::mat4(1.0f);
-  glm::mat4 projMat = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.01f, 100.0f);
+  glm::mat4 viewMat = glm::lookAt(
+    glm::vec3(0.0f, 0.0f, -20.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 1.0f, 0.0f)
+  );
+  glm::mat4 projMat = glm::perspective(
+    glm::radians(100.0f),
+    std::get<0>(AspectRatio) / std::get<1>(AspectRatio),
+    0.01f,
+    1000.0f);
   Camera mainCamera(viewMat, projMat);
 
   glUseProgram(ShaderProgramID);
   glUniformMatrix4fv(
-    glGetUniformLocation(ShaderProgramID, "uViewMatrix"), 
+    glGetUniformLocation(ShaderProgramID, "ugViewMatrix"), 
     1, GL_FALSE, (GLfloat*)&mainCamera.GetViewMatrix());
   glUniformMatrix4fv(
-    glGetUniformLocation(ShaderProgramID, "uProjMatrix"),
+    glGetUniformLocation(ShaderProgramID, "ugProjMatrix"),
     1, GL_FALSE, (GLfloat*)&mainCamera.GetProjMatrix());
+
+  // Attractive Particles
+  const int NUM_ATTRACTORS = 3;
+  struct Particle
+  {
+    glm::vec3 position;
+    float mass;
+  } attractors[NUM_ATTRACTORS];
+  attractors[0].mass = 1000000000000.0f;
+  attractors[1].mass = 1000000000000.0f;
+  attractors[2].mass = 1000000000000.0f;
 
   while (!glfwWindowShouldClose(window))
   {
     FrameStart = std::chrono::system_clock::now();
 
-    particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
-    particle_uColor.b = 0.5f * (std::cos(3 * uTime) + 1);
+    //particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
+    //particle_uColor.b = 0.5f * (std::cos(3 * uTime) + 1);
+
+    attractors[0].position = glm::vec3(std::cos(uTime), std::sin(uTime), 0.0f);
+    attractors[1].position = glm::vec3(std::cos(uTime + (float)std::_Pi*0.67f), std::sin(uTime + (float)std::_Pi*0.67f), 0.0f);
+    attractors[2].position = glm::vec3(std::cos(uTime + (float)std::_Pi*1.33f), std::sin(uTime + (float)std::_Pi*1.33f), 0.0f);
+
+    for (int i = 0; i < NUM_ATTRACTORS; i++)
+    {
+      std::string aPos = "attractors[" + std::to_string(i) + "].position";
+      std::string aMass = "attractors[" + std::to_string(i) + "].mass";
+      std::cout << aPos << " : " << glGetUniformLocation(ComputeProgramID, (GLchar*)(aPos.c_str())) << std::endl;
+      glUniform3fv(
+        glGetUniformLocation(ComputeProgramID, (GLchar*)(aPos.c_str())),
+        1, (GLfloat*)&attractors[i].position);
+      glUniform1fv(
+        glGetUniformLocation(ComputeProgramID, (GLchar*)(aMass.c_str())),
+        1, (GLfloat*)&attractors[i].mass);
+    }
 
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -216,10 +259,17 @@ int main()
 
     // Draw particles
     glUseProgram(ShaderProgramID);
-    glUniform4fv(glGetUniformLocation(ShaderProgramID, "uColor"), 1, (GLfloat*)&particle_uColor);
+    //glUniform4fv(glGetUniformLocation(ShaderProgramID, "uColor"), 1, (GLfloat*)&particle_uColor);
     glBindBuffer(GL_ARRAY_BUFFER, computePosBufID);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(glGetAttribLocation(ShaderProgramID, "aPosition"));
+    glVertexAttribPointer(
+      glGetAttribLocation(ShaderProgramID, "aPosition"),
+      4, GL_FLOAT, GL_FALSE, 0, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, computeColorBufID);
+    glEnableVertexAttribArray(glGetAttribLocation(ShaderProgramID, "aColor"));
+    glVertexAttribPointer(
+      glGetAttribLocation(ShaderProgramID, "aColor"),
+      4, GL_FLOAT, GL_FALSE, 0, 0);
     glDrawArrays(GL_POINTS, 0, NUM_PARTICLES);
 
     // Draw Triangle
@@ -236,7 +286,7 @@ int main()
 
     deltaTime = (float)(std::chrono::duration_cast<std::chrono::milliseconds>
       (std::chrono::system_clock::now() - FrameStart).count()) / 1000.0f;
-    std::cout << deltaTime << std::endl;
+    //std::cout << deltaTime << std::endl;
     uTime += deltaTime;
   }
 

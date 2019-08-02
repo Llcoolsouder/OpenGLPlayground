@@ -31,26 +31,25 @@ layout(std140, binding = 6) buffer aCol
 };
 
 /**
- * Defines a plane 
+ * Contains all relevant information for a point mass
  */
-struct Plane 
+struct Particle
 {
-	vec3 P; //< Any point on the plane
-	vec3 N; //< Vector normal to the plane
+	vec3 position;
+	float mass;
 };
 
 /** Acceleration due to gravity */
-const vec3 g = vec3(0.0f, -9.8f, 0.0f);
+const vec3 g = vec3(0.0f, 0.0f, 0.0f);
 
-/** Specifies the floor */
-const Plane ground = 
-{
-	vec3(-1.0f,0.0f, 0.0f),
-	vec3(1.0f, 1.0f, 0.0f),
-};
+/** Gravitational constant [m^3 / (s^2 * kg)] */
+const float G = 6.67 * pow(10, -11);
 
-/** Percentage of energy conserved on bounce */
-uniform float dampeningFactor = 0.95f;
+/**  Mass of every particle */
+uniform float particleMass = 1.0f;
+
+uniform float maxVelocity = 200.0f;
+uniform float maxAcceleration = 20.0f;
 
 /** Time passed since the last frame [s] */
 uniform float dT = 0.01f;
@@ -58,42 +57,34 @@ uniform float dT = 0.01f;
 /** Time speedup factor */
 uniform float timeScale = 0.1f;
 
-/**
- * Calculates the new velocity of a particle
- * after it has bounced off of a surface
- *
- * @param vin The velocity before the bounce
- * @param n The normal vector of the surface
- * @return The velocity of the particle after the bounce
- */
-vec3 Bounce(vec3 vin, vec3 n)
+const int NUM_ATTRACTORS = 3;
+
+uniform Particle attractors[NUM_ATTRACTORS] =
 {
-	return reflect(vin, normalize(n)) * dampeningFactor;
+	Particle(vec3(0.0f, 10.0f, 0.0f),	1000000000000000.0f),
+	Particle(vec3(-7.07f, -7.07f, 0.0f),1000000000000000.0f),
+	Particle(vec3(7.07f, -7.07f, 0.0f), 1000000000000000.0f),
 };
 
-/**
- * Computes the distance from a plane to a point along the plane normal
- *
- * @param p Point in question
- * @param s Plane from which to measure
- * @return Distance from plane to point along the plane normal
- */
-float ComputeDistanceAlongNormal(vec3 p, Plane s)
-{
-	return dot(normalize(s.N), p - s.P);
-}
+uniform mat4 uProjMatrix = mat4(1.0f);
+uniform mat4 uViewMatrix = mat4(1.0f);
+uniform mat4 uModelMatrix = mat4(1.0f);
 
 /**
- * Calculates whether or not a point is below the surface
+ * Calculates the gravitational force between two point masses
  *
- * @param p Point in question
- * @param s Surface in question
- * @return True if the point is below or on the plane; otherwise false
+ * Note:	A particle with negative mass will reverse the direction of the force.
+ *			Two particles with negative mass will behave normally
+ *
+ * @param p1 Point mass 1
+ * @param p2 Point mass 2
+ * @return	A vector pointing from p2 to p1 with magnitude equal to 
+ *			the gravitational force between them
  */
-bool IsBelowSurface(vec3 p, Plane s)
+vec3 GravitationalForce(Particle p1, Particle p2)
 {
-	float D = ComputeDistanceAlongNormal(p, s);
-	return  D <= 0;
+	float F = G * (p1.mass * p2.mass)/pow(length(p2.position-p1.position), 2.0f);
+	return F * normalize(p2.position - p1.position);
 }
 
 void main()
@@ -101,19 +92,27 @@ void main()
 	float t = dT * timeScale;
 	vec3 p = position[gl_GlobalInvocationID.x].xyz;
 	vec3 v = velocity[gl_GlobalInvocationID.x].xyz;
+	Particle particle = Particle(p, particleMass);
+
+	vec3 F = vec3(0.0f, 0.0f, 0.0f);
+	for (int i = 0; i < NUM_ATTRACTORS; i++)
+	{
+		F += GravitationalForce(particle, attractors[i]);
+	}
+
+	vec3 a = g + (F/particle.mass);
+	a = normalize(a) * clamp(length(a), 0, maxAcceleration);
 
 	// p' = p + vt + 1/2 g t^2
-	vec3 pp = p + (v*t) + (0.5f * g * t * t);
+	vec3 pp = p + (v*t) + (0.5f * a * t * t);
 
 	//v' = v + gt
-	vec3 vp = v + (g*t);
-
-	if (IsBelowSurface(pp, ground))
-	{
-		vp = Bounce(vp, ground.N);
-		pp = p + (vp*t) + (0.5f * g * t * t);
-	}
+	vec3 vp = v + (a*t);
+	vp = normalize(vp) * clamp(length(vp), 0, maxVelocity);
 
 	position[gl_GlobalInvocationID.x].xyz = pp;
 	velocity[gl_GlobalInvocationID.x].xyz = vp;
+
+	vec3 scaledV = abs(vp/(maxVelocity*0.5f));
+	color[gl_GlobalInvocationID.x].xyzw = vec4(scaledV, 1.0f);
 }

@@ -38,7 +38,7 @@ namespace LSShaderUtilities
    * @param FilePath  A string containing the path to the file
    *                  This function assumes the following file extensions:
    *                  Vertex Shader = ".vert"
-   *                  Geometry Shader = ".geo"
+   *                  Geometry Shader = ".geom"
    *                  Fragment Shader = ".frag"
    *                  Compute Shader = ".comp"
    * @return The ID of the compiled shader object

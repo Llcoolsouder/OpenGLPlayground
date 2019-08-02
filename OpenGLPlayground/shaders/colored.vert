@@ -1,8 +1,8 @@
 /**
  * @file solid.vert
  * 
- * Vertex shader which takes in a set of vec4 positions
- * and outputs the unmodified position and a uniform color
+ * Vertex shader which takes in a set of vec4 positions and colors
+ * and outputs the unmodified position and colors
  *
  * @author Lonnie L. Souder II
  * @date 08/01/2019
@@ -18,11 +18,11 @@ uniform mat4 uvViewMatrix = mat4(1.0f);
 /** The model matrix (specifies model position and orientation */
 uniform mat4 uvModelMatrix = mat4(1.0f);
 
-/** A vec4 specifying the color of all vertices that pass through this shader */
-uniform vec4 uColor = vec4(1.0f, 1.0f, 1.0f, 1.0f); 
-
-/** A vec4 specifying position of the vertex; The only input for this shader */
+/** A vec4 specifying position of the vertex */
 layout(location = 0) in vec4 aPosition;
+
+/** A vec4 specifying the color of this vertex */
+layout(location = 1) in vec4 aColor;
 
 /** Interface block */
 out VERT_DATA {
@@ -32,5 +32,5 @@ out VERT_DATA {
 void main()
 {
 	gl_Position = uvProjMatrix * uvViewMatrix * uvModelMatrix * aPosition;
-	vs_out.vColor = uColor;
+	vs_out.vColor = aColor;
 }

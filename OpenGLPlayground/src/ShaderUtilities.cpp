@@ -42,7 +42,7 @@ GLuint LSShaderUtilities::LoadShader(const std::string& FilePath)
   else
   {
     std::cerr << "ERROR: Unable to get file extension. " << std::endl;
-    exit(1);
+    return (GLuint)0;
   }
   
   GLenum ShaderType;
@@ -50,7 +50,7 @@ GLuint LSShaderUtilities::LoadShader(const std::string& FilePath)
   {
     ShaderType = GL_VERTEX_SHADER;
   }
-  else if (extension == ".geo")
+  else if (extension == ".geom")
   {
     ShaderType = GL_GEOMETRY_SHADER;
   }
@@ -65,7 +65,7 @@ GLuint LSShaderUtilities::LoadShader(const std::string& FilePath)
   else
   {
     std::cerr << "ERROR: Unrecognized shader extension." << std::endl;
-    exit(1);
+    return (GLuint)0;
   }
 
   std::string ShaderSource = LSShaderUtilities::LoadFile(FilePath);
