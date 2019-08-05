@@ -229,22 +229,22 @@ int main()
     //particle_uColor.r = 0.5f * (std::sin(uTime) + 1);
     //particle_uColor.b = 0.5f * (std::cos(3 * uTime) + 1);
 
-    attractors[0].position = glm::vec3(std::cos(uTime), std::sin(uTime), 0.0f);
-    attractors[1].position = glm::vec3(std::cos(uTime + (float)std::_Pi*0.67f), std::sin(uTime + (float)std::_Pi*0.67f), 0.0f);
-    attractors[2].position = glm::vec3(std::cos(uTime + (float)std::_Pi*1.33f), std::sin(uTime + (float)std::_Pi*1.33f), 0.0f);
+    //attractors[0].position = glm::vec3(std::cos(uTime), std::sin(uTime), 0.0f);
+    //attractors[1].position = glm::vec3(std::cos(uTime + (float)std::_Pi*0.67f), std::sin(uTime + (float)std::_Pi*0.67f), 0.0f);
+    //attractors[2].position = glm::vec3(std::cos(uTime + (float)std::_Pi*1.33f), std::sin(uTime + (float)std::_Pi*1.33f), 0.0f);
 
-    for (int i = 0; i < NUM_ATTRACTORS; i++)
-    {
-      std::string aPos = "attractors[" + std::to_string(i) + "].position";
-      std::string aMass = "attractors[" + std::to_string(i) + "].mass";
-      std::cout << aPos << " : " << glGetUniformLocation(ComputeProgramID, (GLchar*)(aPos.c_str())) << std::endl;
-      glUniform3fv(
-        glGetUniformLocation(ComputeProgramID, (GLchar*)(aPos.c_str())),
-        1, (GLfloat*)&attractors[i].position);
-      glUniform1fv(
-        glGetUniformLocation(ComputeProgramID, (GLchar*)(aMass.c_str())),
-        1, (GLfloat*)&attractors[i].mass);
-    }
+    //for (int i = 0; i < NUM_ATTRACTORS; i++)
+    //{
+    //  std::string aPos = "attractors[" + std::to_string(i) + "].position";
+    //  std::string aMass = "attractors[" + std::to_string(i) + "].mass";
+    //  std::cout << aPos << " : " << glGetUniformLocation(ComputeProgramID, (GLchar*)(aPos.c_str())) << std::endl;
+    //  glUniform3fv(
+    //    glGetUniformLocation(ComputeProgramID, (GLchar*)(aPos.c_str())),
+    //    1, (GLfloat*)&attractors[i].position);
+    //  glUniform1fv(
+    //    glGetUniformLocation(ComputeProgramID, (GLchar*)(aMass.c_str())),
+    //    1, (GLfloat*)&attractors[i].mass);
+    //}
 
     glClear(GL_COLOR_BUFFER_BIT);
 
