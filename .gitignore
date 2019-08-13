@@ -354,3 +354,5 @@ MigrationBackup/
 # Doxygen
 doc/
 
+# CMake
+# [Bb]uild/
