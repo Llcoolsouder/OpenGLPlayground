@@ -8,6 +8,10 @@ file(GLOB
 file(GLOB_RECURSE
 	HEADER_FILES
 	${CMAKE_SOURCE_DIR}/include/*.h)
+# file(GLOB_RECURSE
+	# SHADER_FILES
+	# ${CMAKE_SOURCE_DIR}/shaders/*)
+	# message(${SHADER_FILES})
 	
 # Create executable	
 add_executable(
@@ -29,6 +33,10 @@ source_group(
 	"Headers"
 	FILES
 	${HEADER_FILES})
+# source_group(
+	# "Shaders"
+	# FILES
+	# ${SHADER_FILES})
 	
 # Find external libraries
 list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew")
