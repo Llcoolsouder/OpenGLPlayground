@@ -111,7 +111,7 @@ int main()
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-  const std::string ShaderFolder = "./shaders/";
+  const std::string ShaderFolder = "../shaders/";
   GLuint VertexShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "colored.vert");
   GLuint GeomShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "point_to_circle.geom");
   GLuint FragmentShaderID = LSShaderUtilities::LoadShader(ShaderFolder + "solid.frag");
@@ -254,7 +254,8 @@ int main()
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 5, computeVelBufID);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 6, computeColorBufID);
     glUniform1fv(glGetUniformLocation(ComputeProgramID, "dT"), 1, &deltaTime);
-    glDispatchComputeGroupSizeARB(NUM_WORK_GROUPS, 1, 1, WORK_GROUP_SIZE, 1, 1);
+	glDispatchCompute(NUM_WORK_GROUPS, 1, 1);
+    //glDispatchComputeGroupSizeARB(NUM_WORK_GROUPS, 1, 1, WORK_GROUP_SIZE, 1, 1);
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
     // Draw particles
