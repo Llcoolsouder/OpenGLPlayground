@@ -211,6 +211,12 @@ int main()
     glGetUniformLocation(ShaderProgramID, "ugProjMatrix"),
     1, GL_FALSE, (GLfloat*)&mainCamera.GetProjMatrix());
 
+  float timeScale = 0.5f;
+  glUseProgram(ComputeProgramID);
+  glUniform1fv(
+	  glGetUniformLocation(ComputeProgramID, "timeScale"),
+	  1, (GLfloat*)&timeScale);
+
   // Attractive Particles
   const int NUM_ATTRACTORS = 3;
   struct Particle

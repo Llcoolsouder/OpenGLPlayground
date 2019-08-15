@@ -56,7 +56,7 @@ uniform float maxAcceleration = 20.0f;
 uniform float dT = 0.01f;
 
 /** Time speedup factor */
-uniform float timeScale = 0.1f;
+uniform float timeScale = 1.0f;
 
 const int NUM_ATTRACTORS = 3;
 
