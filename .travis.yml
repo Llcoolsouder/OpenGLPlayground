@@ -5,7 +5,15 @@ compiler:
         - gcc
 os: linux
 
-before_install:
+install:
         - sudo apt-get install -y libglew-dev 
         - sudo apt-get install -y libglm-dev
         - sudo apt-get install -y libglfw3-dev
+
+script:
+        - mkdir build
+        - cmake CMakeLists.txt -B build
+        - cmake --build build --target ALL_BUILD
+
+after_success:
+        - doxygen .
