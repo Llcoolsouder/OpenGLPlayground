@@ -6,4 +6,6 @@ compiler:
 os: linux
 
 before_install:
-        - sudo apt-get install -y glew glew-dev glfw3 glfw3-dev glm cmake
+        - sudo apt-get install -y libglew libglew-dev 
+        - sudo apt-get install -y libglm libglm-dev
+        - sudo apt-get install -y libglfw3 libglfw3-dev
