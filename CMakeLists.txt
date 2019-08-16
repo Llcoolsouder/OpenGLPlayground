@@ -31,6 +31,10 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	PROPERTIES 
 	LINK_FLAGS
 	/SUBSYSTEM:CONSOLE)
+	
+	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew")
+	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew/lib/Release/Win32")
+	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew/bin/Release/Win32")
 endif()
 
 # Add project filters	
@@ -48,10 +52,6 @@ source_group(
 	# ${SHADER_FILES})
 	
 # Find external libraries
-list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew")
-list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew/lib/Release/Win32")
-list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew/bin/Release/Win32")
-
 find_file(
 	GLEW_DLL
 	"glew32.dll")
@@ -77,7 +77,7 @@ message(STATUS
 
 # Link libraries
 set(LIBS
-	opengl32
+	OpenGL::GL
 	${GLFW3_LIBRARY}
 	${GLEW_LIBRARIES})
 target_link_libraries(
