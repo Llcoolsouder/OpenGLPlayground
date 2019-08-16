@@ -204,12 +204,14 @@ int main()
   Camera mainCamera(viewMat, projMat);
 
   glUseProgram(ShaderProgramID);
+  glm::mat4 t_uViewMatrix = mainCamera.GetViewMatrix();
+  glm::mat4 t_uProjMatrix = mainCamera.GetProjMatrix();
   glUniformMatrix4fv(
     glGetUniformLocation(ShaderProgramID, "ugViewMatrix"), 
-    1, GL_FALSE, (GLfloat*)&mainCamera.GetViewMatrix());
+    1, GL_FALSE, (GLfloat*)&t_uViewMatrix);
   glUniformMatrix4fv(
     glGetUniformLocation(ShaderProgramID, "ugProjMatrix"),
-    1, GL_FALSE, (GLfloat*)&mainCamera.GetProjMatrix());
+    1, GL_FALSE, (GLfloat*)&t_uProjMatrix);
 
   float timeScale = 0.5f;
   glUseProgram(ComputeProgramID);
