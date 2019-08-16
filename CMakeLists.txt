@@ -19,10 +19,19 @@ add_executable(
 	${HEADER_FILES}
 	${SOURCE_FILES})
 	
-set_target_properties(${PROJECT_NAME}
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  # using Clang
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  # using GCC
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+  # using Intel C++
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+  # using Visual Studio C++
+	set_target_properties(${PROJECT_NAME}
 	PROPERTIES 
 	LINK_FLAGS
 	/SUBSYSTEM:CONSOLE)
+endif()
 
 # Add project filters	
 source_group(
