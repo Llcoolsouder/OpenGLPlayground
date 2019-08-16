@@ -52,14 +52,14 @@ source_group(
 	# ${SHADER_FILES})
 	
 # Find external libraries
-find_file(
-	GLEW_DLL
-	"glew32.dll")
+# find_file(
+	# GLEW_DLL
+	# "glew32.dll")
 	
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD 
-		   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		   ${GLEW_DLL}              
-			$<TARGET_FILE_DIR:${PROJECT_NAME}>)
+# add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD 
+		   # COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		   # ${GLEW_DLL}              
+			# $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
 set(CMAKE_MODULE_PATH
 	${CMAKE_MODULE_PATH}
@@ -71,15 +71,16 @@ message(STATUS
 find_package(GLFW3 REQUIRED)
 message(STATUS
 	"GLFW3 included at ${GLFW3_INCLUDE_DIR}")
+set(GLEW_USE_STATIC_LIBS TRUE)
 find_package(GLEW REQUIRED)
 message(STATUS	
 	"GLEW included at ${GLEW_INCLUDE_DIR}")
-
+	
 # Link libraries
 set(LIBS
 	OpenGL::GL
 	${GLFW3_LIBRARY}
-	${GLEW_LIBRARIES})
+	GLEW::glew_s)
 target_link_libraries(
 	${PROJECT_NAME}
 	${LIBS})
