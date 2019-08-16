@@ -11,9 +11,10 @@ install:
         - sudo apt-get install -y libglfw3-dev
 
 script:
-        - mkdir build
-        - cmake CMakeLists.txt -B build
-        - cmake --build build --target ALL_BUILD
+        - mkdir build && cd build
+        - cmake ..
+        - cmake --build .
+        - cd ..
 
 after_success:
         - doxygen .
