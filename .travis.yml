@@ -1,9 +1,20 @@
 language: cpp
-sudo: required
-dist: bionic
-compiler:
-  - gcc
-os: linux
+branches:
+  only:
+    - master
+env:
+  global:
+    - GH_REF="https://github.com/Llcoolsouder/OpenGLPlayground.git"
+
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      sudo: required
+      compiler: gcc
+  #  - os: windows
+  #    compiler: msvc
+
 
 install:
   - sudo apt-get install -y libglew-dev
