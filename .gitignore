@@ -352,7 +352,7 @@ MigrationBackup/
 .ionide/
 
 # Doxygen
-doc/
+docs/
 
 # CMake
 [Bb]uild/
