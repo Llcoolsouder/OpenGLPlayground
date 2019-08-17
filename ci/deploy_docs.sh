@@ -1,5 +1,7 @@
 #!/bin/sh
 
+git checkout master
+
 # Build docs
 doxygen Doxyfile
 ls -lh
