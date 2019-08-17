@@ -7,5 +7,6 @@ doxygen Doxyfile
 git add -f docs/*
 COMMIT_MESSAGE="Travis: Updating docs for build #${TRAVIS_BUILD_NUMBER} [skip ci]"
 git commit --allow-empty -m "${COMMIT_MESSAGE}"
+git status
 git remote add origin-travis "https://llcoolsouder:${GH_TOKEN}@${GH_REF}"
 git push --set-upstream origin-travis master
