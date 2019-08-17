@@ -4,8 +4,9 @@ git checkout master
 
 # Build docs
 doxygen Doxyfile
-ls -lh
-ls docs -lh
+rm -rf docs/latex
+cp docs/html/* docs/
+rm -rf docs/html
 
 # Commit changes and push to origin
 git status
