@@ -4,7 +4,7 @@
  *
  * @section Summary
  * This project serves as a sandbox in which to learn and practice OpenGL
- * 
+ *
  * @section Main Topics
  * The focus of these exercises will be in understanding high-performance
  * computing and some computer graphics, thus the topics will include:
@@ -66,7 +66,7 @@ int main()
   }
 
   //Window creation
-  const std::tuple<float, float> AspectRatio = {16.0f, 9.0f};
+  const std::tuple<float, float> AspectRatio = std::tuple<float, float>(16.0f, 9.0f);
   const int WindowSize = 100;
   window = glfwCreateWindow(
     WindowSize * std::get<0>(AspectRatio),
@@ -96,7 +96,7 @@ int main()
 
   glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 
-  glm::vec3  vertices[] = 
+  glm::vec3  vertices[] =
   {{-0.5f, -0.5f, 0.0f},
   {0.5f, -0.5f, 0.0f},
   {0.0f,  0.5f, 0.0f}};
@@ -207,7 +207,7 @@ int main()
   glm::mat4 t_uViewMatrix = mainCamera.GetViewMatrix();
   glm::mat4 t_uProjMatrix = mainCamera.GetProjMatrix();
   glUniformMatrix4fv(
-    glGetUniformLocation(ShaderProgramID, "ugViewMatrix"), 
+    glGetUniformLocation(ShaderProgramID, "ugViewMatrix"),
     1, GL_FALSE, (GLfloat*)&t_uViewMatrix);
   glUniformMatrix4fv(
     glGetUniformLocation(ShaderProgramID, "ugProjMatrix"),

@@ -6,14 +6,14 @@ compiler:
 os: linux
 
 install:
-        - sudo apt-get install -y libglew-dev 
+        - sudo apt-get install -y libglew-dev
         - sudo apt-get install -y libglm-dev
         - sudo apt-get install -y libglfw3-dev
 
 script:
         - mkdir build && cd build
         - cmake ..
-        - cmake --build .
+        - make .
         - cd ..
 
 after_success:
