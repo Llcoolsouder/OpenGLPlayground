@@ -9,7 +9,7 @@
 4. [Examples (you should just skip to this)](#examples)
 
 
-# Description <a name="description"></a>
+## Description <a name="description"></a>
 This is just a mess of code created in my OpenGL studies.  
 All of the code is documented at <https://llcoolsouder.github.io/OpenGLPlayground/index.html>;
 not because I think anyone will find it particularly useful, but because it's
