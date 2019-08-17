@@ -1,0 +1,90 @@
+\hypertarget{particle_8comp}{}\section{shaders/particle.comp File Reference}
+\label{particle_8comp}\index{shaders/particle.\+comp@{shaders/particle.\+comp}}
+
+
+Compute shader which updates positions and velocities of falling particles with no other forces other than gravity.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{particle_8comp_acdef7a1fd863a6d3770c1268cb06add3}{main} ()
+\begin{DoxyCompactList}\small\item\em The main shader function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{particle_8comp_a64b0840001d30ff8cd416759a03542ce}\label{particle_8comp_a64b0840001d30ff8cd416759a03542ce}} 
+{\bfseries in}
+\item 
+buffer \hyperlink{particle_8comp_a9f39e8aaa860ed0953f27908a3b221d0}{a\+Pos}
+\begin{DoxyCompactList}\small\item\em The buffer containing the positions of all of the particles. \end{DoxyCompactList}\item 
+buffer \hyperlink{particle_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}{a\+Vel}
+\begin{DoxyCompactList}\small\item\em The buffer containing all the velocities of the particles. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle_8comp_afa6fb72b63888e1e0999df05216df22c}\label{particle_8comp_afa6fb72b63888e1e0999df05216df22c}} 
+uniform float \hyperlink{particle_8comp_afa6fb72b63888e1e0999df05216df22c}{dT} = 0.\+01f
+\begin{DoxyCompactList}\small\item\em Uniform float specifying the time since the last frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle_8comp_a28376120f625e213331c1deb2e34108e}\label{particle_8comp_a28376120f625e213331c1deb2e34108e}} 
+const vec3 \hyperlink{particle_8comp_a28376120f625e213331c1deb2e34108e}{G} = vec3(0.\+0f, -\/9.\+8f, 0.\+0f)
+\begin{DoxyCompactList}\small\item\em Acceleration due to gravity. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle_8comp_a5ebc1bad69dea0ec25d6a686b785183e}\label{particle_8comp_a5ebc1bad69dea0ec25d6a686b785183e}} 
+const float \hyperlink{particle_8comp_a5ebc1bad69dea0ec25d6a686b785183e}{time\+Scale} = 0.\+01f
+\begin{DoxyCompactList}\small\item\em Slows or speeds up time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Compute shader which updates positions and velocities of falling particles with no other forces other than gravity. 
+
+\begin{DoxyAuthor}{Author}
+Lonnie L. Souder II 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+08/01/2019 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{particle_8comp_acdef7a1fd863a6d3770c1268cb06add3}\label{particle_8comp_acdef7a1fd863a6d3770c1268cb06add3}} 
+\index{particle.\+comp@{particle.\+comp}!main@{main}}
+\index{main@{main}!particle.\+comp@{particle.\+comp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily void main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The main shader function. 
+
+Computes new positions and velocities based on simple kinematic equations p\textquotesingle{} = p + vt + 1/2 G t$^\wedge$2
+
+v\textquotesingle{} = v + Gt 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{particle_8comp_a9f39e8aaa860ed0953f27908a3b221d0}\label{particle_8comp_a9f39e8aaa860ed0953f27908a3b221d0}} 
+\index{particle.\+comp@{particle.\+comp}!a\+Pos@{a\+Pos}}
+\index{a\+Pos@{a\+Pos}!particle.\+comp@{particle.\+comp}}
+\subsubsection{\texorpdfstring{a\+Pos}{aPos}}
+{\footnotesize\ttfamily buffer a\+Pos}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 Positions[]
+\end{DoxyCode}
+
+
+The buffer containing the positions of all of the particles. 
+
+\mbox{\Hypertarget{particle_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}\label{particle_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}} 
+\index{particle.\+comp@{particle.\+comp}!a\+Vel@{a\+Vel}}
+\index{a\+Vel@{a\+Vel}!particle.\+comp@{particle.\+comp}}
+\subsubsection{\texorpdfstring{a\+Vel}{aVel}}
+{\footnotesize\ttfamily buffer a\+Vel}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 Velocities[]
+\end{DoxyCode}
+
+
+The buffer containing all the velocities of the particles. 
+

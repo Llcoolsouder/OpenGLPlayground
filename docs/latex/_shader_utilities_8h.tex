@@ -1,0 +1,35 @@
+\hypertarget{_shader_utilities_8h}{}\section{include/\+Shader\+Utilities.h File Reference}
+\label{_shader_utilities_8h}\index{include/\+Shader\+Utilities.\+h@{include/\+Shader\+Utilities.\+h}}
+
+
+Contains a set of functions helpful for loading, compiling, and linking shaders.  
+
+
+{\ttfamily \#include $<$G\+L/glew.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace_l_s_shader_utilities}{L\+S\+Shader\+Utilities}
+\begin{DoxyCompactList}\small\item\em Contains a set of functions that are helpfule for loading compiling and linking shaders. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{namespace_l_s_shader_utilities_ad1e646e21414567daa2167d625bcdba6}{L\+S\+Shader\+Utilities\+::\+Load\+File} (const std\+::string \&File\+Path)
+\begin{DoxyCompactList}\small\item\em Loads contents of a file into a string. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{namespace_l_s_shader_utilities_a1dd5d9b0ace8599c62360f5d4a96132a}{L\+S\+Shader\+Utilities\+::\+Load\+Shader} (const std\+::string \&File\+Path)
+\begin{DoxyCompactList}\small\item\em Loads and compiles a G\+L\+SL shader. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{namespace_l_s_shader_utilities_ab0e4634e03ac53beb004f153b45a61b3}{L\+S\+Shader\+Utilities\+::\+Link\+Program} (std\+::vector$<$ G\+Luint $>$ Shader\+I\+Ds)
+\begin{DoxyCompactList}\small\item\em Links a set of shaders to create a program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains a set of functions helpful for loading, compiling, and linking shaders. 
+
+\begin{DoxyAuthor}{Author}
+Lonnie L. Souder II 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+07/31/2019 
+\end{DoxyDate}

@@ -1,0 +1,190 @@
+\hypertarget{bouncing__particles_8comp}{}\section{shaders/bouncing\+\_\+particles.comp File Reference}
+\label{bouncing__particles_8comp}\index{shaders/bouncing\+\_\+particles.\+comp@{shaders/bouncing\+\_\+particles.\+comp}}
+
+
+Compute shader which updates positions and velocities of falling particles which bounce when they hit a floor plane.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_plane}{Plane}
+\begin{DoxyCompactList}\small\item\em Defines a plane. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vec3 \hyperlink{bouncing__particles_8comp_a11c062c4611d15da5fb25a630e7298b9}{Bounce} (vec3 vin, vec3 n)
+\begin{DoxyCompactList}\small\item\em Calculates the new velocity of a particle after it has bounced off of a surface. \end{DoxyCompactList}\item 
+float \hyperlink{bouncing__particles_8comp_a5393b9632a296e4a790b4d9bbcf2fa34}{Compute\+Distance\+Along\+Normal} (vec3 p, \hyperlink{struct_plane}{Plane} s)
+\begin{DoxyCompactList}\small\item\em Computes the distance from a plane to a point along the plane normal. \end{DoxyCompactList}\item 
+bool \hyperlink{bouncing__particles_8comp_af355fbdc8876dcfd4808b4b97a33753a}{Is\+Below\+Surface} (vec3 p, \hyperlink{struct_plane}{Plane} s)
+\begin{DoxyCompactList}\small\item\em Calculates whether or not a point is below the surface. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{bouncing__particles_8comp_acdef7a1fd863a6d3770c1268cb06add3}\label{bouncing__particles_8comp_acdef7a1fd863a6d3770c1268cb06add3}} 
+void {\bfseries main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{bouncing__particles_8comp_a64b0840001d30ff8cd416759a03542ce}\label{bouncing__particles_8comp_a64b0840001d30ff8cd416759a03542ce}} 
+{\bfseries in}
+\item 
+buffer \hyperlink{bouncing__particles_8comp_a9f39e8aaa860ed0953f27908a3b221d0}{a\+Pos}
+\begin{DoxyCompactList}\small\item\em The buffer containing the positions of all of the particles. \end{DoxyCompactList}\item 
+buffer \hyperlink{bouncing__particles_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}{a\+Vel}
+\begin{DoxyCompactList}\small\item\em The buffer containing the velocities of the particles. \end{DoxyCompactList}\item 
+buffer \hyperlink{bouncing__particles_8comp_a41cc0a0d722413ed428da01e38311893}{a\+Col}
+\begin{DoxyCompactList}\small\item\em The buffer containing the colors of the particles. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{bouncing__particles_8comp_afbfc2de3569f43befe0b8abf8ff644e3}\label{bouncing__particles_8comp_afbfc2de3569f43befe0b8abf8ff644e3}} 
+const vec3 \hyperlink{bouncing__particles_8comp_afbfc2de3569f43befe0b8abf8ff644e3}{g} = vec3(0.\+0f, -\/9.\+8f, 0.\+0f)
+\begin{DoxyCompactList}\small\item\em Acceleration due to gravity. \end{DoxyCompactList}\item 
+const \hyperlink{struct_plane}{Plane} \hyperlink{bouncing__particles_8comp_ad95bc51bdd453bc39861ab0250f2bc14}{ground}
+\begin{DoxyCompactList}\small\item\em Specifies the floor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{bouncing__particles_8comp_abf1cc62bbea63dfe4f91fe35f052ae2e}\label{bouncing__particles_8comp_abf1cc62bbea63dfe4f91fe35f052ae2e}} 
+uniform float \hyperlink{bouncing__particles_8comp_abf1cc62bbea63dfe4f91fe35f052ae2e}{dampening\+Factor} = 0.\+95f
+\begin{DoxyCompactList}\small\item\em Percentage of energy conserved on bounce. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{bouncing__particles_8comp_afa6fb72b63888e1e0999df05216df22c}\label{bouncing__particles_8comp_afa6fb72b63888e1e0999df05216df22c}} 
+uniform float \hyperlink{bouncing__particles_8comp_afa6fb72b63888e1e0999df05216df22c}{dT} = 0.\+01f
+\begin{DoxyCompactList}\small\item\em Time passed since the last frame \mbox{[}s\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{bouncing__particles_8comp_ada8995d196db18c951ef5fe8de204a08}\label{bouncing__particles_8comp_ada8995d196db18c951ef5fe8de204a08}} 
+uniform float \hyperlink{bouncing__particles_8comp_ada8995d196db18c951ef5fe8de204a08}{time\+Scale} = 0.\+1f
+\begin{DoxyCompactList}\small\item\em Time speedup factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Compute shader which updates positions and velocities of falling particles which bounce when they hit a floor plane. 
+
+\begin{DoxyAuthor}{Author}
+Lonnie L. Souder II 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+08/01/2019 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{bouncing__particles_8comp_a11c062c4611d15da5fb25a630e7298b9}\label{bouncing__particles_8comp_a11c062c4611d15da5fb25a630e7298b9}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!Bounce@{Bounce}}
+\index{Bounce@{Bounce}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{Bounce()}{Bounce()}}
+{\footnotesize\ttfamily vec3 Bounce (\begin{DoxyParamCaption}\item[{vec3}]{vin,  }\item[{vec3}]{n }\end{DoxyParamCaption})}
+
+
+
+Calculates the new velocity of a particle after it has bounced off of a surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vin} & The velocity before the bounce \\
+\hline
+{\em n} & The normal vector of the surface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The velocity of the particle after the bounce 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bouncing__particles_8comp_a5393b9632a296e4a790b4d9bbcf2fa34}\label{bouncing__particles_8comp_a5393b9632a296e4a790b4d9bbcf2fa34}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!Compute\+Distance\+Along\+Normal@{Compute\+Distance\+Along\+Normal}}
+\index{Compute\+Distance\+Along\+Normal@{Compute\+Distance\+Along\+Normal}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{Compute\+Distance\+Along\+Normal()}{ComputeDistanceAlongNormal()}}
+{\footnotesize\ttfamily float Compute\+Distance\+Along\+Normal (\begin{DoxyParamCaption}\item[{vec3}]{p,  }\item[{\hyperlink{struct_plane}{Plane}}]{s }\end{DoxyParamCaption})}
+
+
+
+Computes the distance from a plane to a point along the plane normal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Point in question \\
+\hline
+{\em s} & \hyperlink{struct_plane}{Plane} from which to measure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance from plane to point along the plane normal 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bouncing__particles_8comp_af355fbdc8876dcfd4808b4b97a33753a}\label{bouncing__particles_8comp_af355fbdc8876dcfd4808b4b97a33753a}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!Is\+Below\+Surface@{Is\+Below\+Surface}}
+\index{Is\+Below\+Surface@{Is\+Below\+Surface}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{Is\+Below\+Surface()}{IsBelowSurface()}}
+{\footnotesize\ttfamily bool Is\+Below\+Surface (\begin{DoxyParamCaption}\item[{vec3}]{p,  }\item[{\hyperlink{struct_plane}{Plane}}]{s }\end{DoxyParamCaption})}
+
+
+
+Calculates whether or not a point is below the surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Point in question \\
+\hline
+{\em s} & Surface in question \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the point is below or on the plane; otherwise false 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{bouncing__particles_8comp_a41cc0a0d722413ed428da01e38311893}\label{bouncing__particles_8comp_a41cc0a0d722413ed428da01e38311893}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!a\+Col@{a\+Col}}
+\index{a\+Col@{a\+Col}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{a\+Col}{aCol}}
+{\footnotesize\ttfamily buffer a\+Col}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 color[]
+\end{DoxyCode}
+
+
+The buffer containing the colors of the particles. 
+
+\mbox{\Hypertarget{bouncing__particles_8comp_a9f39e8aaa860ed0953f27908a3b221d0}\label{bouncing__particles_8comp_a9f39e8aaa860ed0953f27908a3b221d0}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!a\+Pos@{a\+Pos}}
+\index{a\+Pos@{a\+Pos}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{a\+Pos}{aPos}}
+{\footnotesize\ttfamily buffer a\+Pos}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 position[]
+\end{DoxyCode}
+
+
+The buffer containing the positions of all of the particles. 
+
+\mbox{\Hypertarget{bouncing__particles_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}\label{bouncing__particles_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!a\+Vel@{a\+Vel}}
+\index{a\+Vel@{a\+Vel}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{a\+Vel}{aVel}}
+{\footnotesize\ttfamily buffer a\+Vel}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 velocity[]
+\end{DoxyCode}
+
+
+The buffer containing the velocities of the particles. 
+
+\mbox{\Hypertarget{bouncing__particles_8comp_ad95bc51bdd453bc39861ab0250f2bc14}\label{bouncing__particles_8comp_ad95bc51bdd453bc39861ab0250f2bc14}} 
+\index{bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}!ground@{ground}}
+\index{ground@{ground}!bouncing\+\_\+particles.\+comp@{bouncing\+\_\+particles.\+comp}}
+\subsubsection{\texorpdfstring{ground}{ground}}
+{\footnotesize\ttfamily const \hyperlink{struct_plane}{Plane} ground}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= 
+\{
+    vec3(-1.0f,0.0f, 0.0f),
+    vec3(1.0f, 1.0f, 0.0f),
+\}
+\end{DoxyCode}
+
+
+Specifies the floor. 
+

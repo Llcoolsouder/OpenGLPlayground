@@ -1,0 +1,166 @@
+\hypertarget{particle__attraction_8comp}{}\section{shaders/particle\+\_\+attraction.comp File Reference}
+\label{particle__attraction_8comp}\index{shaders/particle\+\_\+attraction.\+comp@{shaders/particle\+\_\+attraction.\+comp}}
+
+
+Compute shader which updates positions and velocities of falling particles with multiple external forces.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_particle}{Particle}
+\begin{DoxyCompactList}\small\item\em Contains all relevant information for a point mass. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vec3 \hyperlink{particle__attraction_8comp_a84b4523a839013a4b2c2c9041697be0f}{Gravitational\+Force} (\hyperlink{struct_particle}{Particle} p1, \hyperlink{struct_particle}{Particle} p2)
+\begin{DoxyCompactList}\small\item\em Calculates the gravitational force between two point masses. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_acdef7a1fd863a6d3770c1268cb06add3}\label{particle__attraction_8comp_acdef7a1fd863a6d3770c1268cb06add3}} 
+void {\bfseries main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{particle__attraction_8comp_a64b0840001d30ff8cd416759a03542ce}\label{particle__attraction_8comp_a64b0840001d30ff8cd416759a03542ce}} 
+{\bfseries in}
+\item 
+buffer \hyperlink{particle__attraction_8comp_a9f39e8aaa860ed0953f27908a3b221d0}{a\+Pos}
+\begin{DoxyCompactList}\small\item\em The buffer containing the positions of all of the particles. \end{DoxyCompactList}\item 
+buffer \hyperlink{particle__attraction_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}{a\+Vel}
+\begin{DoxyCompactList}\small\item\em The buffer containing the velocities of the particles. \end{DoxyCompactList}\item 
+buffer \hyperlink{particle__attraction_8comp_a41cc0a0d722413ed428da01e38311893}{a\+Col}
+\begin{DoxyCompactList}\small\item\em The buffer containing the colors of the particles. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_afbfc2de3569f43befe0b8abf8ff644e3}\label{particle__attraction_8comp_afbfc2de3569f43befe0b8abf8ff644e3}} 
+const vec3 \hyperlink{particle__attraction_8comp_afbfc2de3569f43befe0b8abf8ff644e3}{g} = vec3(0.\+0f, 0.\+0f, 0.\+0f)
+\begin{DoxyCompactList}\small\item\em Acceleration due to gravity. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_accf9cafc36aeda21688e19a1c2d3888d}\label{particle__attraction_8comp_accf9cafc36aeda21688e19a1c2d3888d}} 
+const float \hyperlink{particle__attraction_8comp_accf9cafc36aeda21688e19a1c2d3888d}{G} = 6.\+67 $\ast$ pow(10, -\/11)
+\begin{DoxyCompactList}\small\item\em Gravitational constant \mbox{[}m$^\wedge$3 / (s$^\wedge$2 $\ast$ kg)\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_a6fdfc6d0da52cba2f32086c736e010eb}\label{particle__attraction_8comp_a6fdfc6d0da52cba2f32086c736e010eb}} 
+uniform float \hyperlink{particle__attraction_8comp_a6fdfc6d0da52cba2f32086c736e010eb}{particle\+Mass} = 1.\+0f
+\begin{DoxyCompactList}\small\item\em Mass of every particle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_a04760c9ca79b8e96e8cf26241a0ed6d5}\label{particle__attraction_8comp_a04760c9ca79b8e96e8cf26241a0ed6d5}} 
+uniform float {\bfseries max\+Velocity} = 200.\+0f
+\item 
+\mbox{\Hypertarget{particle__attraction_8comp_a95d3a39252e2b1afbe84408dd7bf7862}\label{particle__attraction_8comp_a95d3a39252e2b1afbe84408dd7bf7862}} 
+uniform float {\bfseries max\+Acceleration} = 20.\+0f
+\item 
+\mbox{\Hypertarget{particle__attraction_8comp_afa6fb72b63888e1e0999df05216df22c}\label{particle__attraction_8comp_afa6fb72b63888e1e0999df05216df22c}} 
+uniform float \hyperlink{particle__attraction_8comp_afa6fb72b63888e1e0999df05216df22c}{dT} = 0.\+01f
+\begin{DoxyCompactList}\small\item\em Time passed since the last frame \mbox{[}s\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_ada8995d196db18c951ef5fe8de204a08}\label{particle__attraction_8comp_ada8995d196db18c951ef5fe8de204a08}} 
+uniform float \hyperlink{particle__attraction_8comp_ada8995d196db18c951ef5fe8de204a08}{time\+Scale} = 1.\+0f
+\begin{DoxyCompactList}\small\item\em Time speedup factor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{particle__attraction_8comp_a634978067ef4e719818cfc454cf3bebe}\label{particle__attraction_8comp_a634978067ef4e719818cfc454cf3bebe}} 
+const int {\bfseries N\+U\+M\+\_\+\+A\+T\+T\+R\+A\+C\+T\+O\+RS} = 3
+\item 
+uniform \hyperlink{struct_particle}{Particle} {\bfseries attractors} \mbox{[}N\+U\+M\+\_\+\+A\+T\+T\+R\+A\+C\+T\+O\+RS\mbox{]}
+\item 
+\mbox{\Hypertarget{particle__attraction_8comp_aca67541978560380a1679e34c3f6d9c1}\label{particle__attraction_8comp_aca67541978560380a1679e34c3f6d9c1}} 
+uniform mat4 {\bfseries u\+Proj\+Matrix} = mat4(1.\+0f)
+\item 
+\mbox{\Hypertarget{particle__attraction_8comp_a64898a8ba6f72a913fe53c32a9be727f}\label{particle__attraction_8comp_a64898a8ba6f72a913fe53c32a9be727f}} 
+uniform mat4 {\bfseries u\+View\+Matrix} = mat4(1.\+0f)
+\item 
+\mbox{\Hypertarget{particle__attraction_8comp_ad5bad8c011aa3081478f3441a9de71c6}\label{particle__attraction_8comp_ad5bad8c011aa3081478f3441a9de71c6}} 
+uniform mat4 {\bfseries u\+Model\+Matrix} = mat4(1.\+0f)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Compute shader which updates positions and velocities of falling particles with multiple external forces. 
+
+\begin{DoxyAuthor}{Author}
+Lonnie L. Souder II 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+08/01/2019 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{particle__attraction_8comp_a84b4523a839013a4b2c2c9041697be0f}\label{particle__attraction_8comp_a84b4523a839013a4b2c2c9041697be0f}} 
+\index{particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}!Gravitational\+Force@{Gravitational\+Force}}
+\index{Gravitational\+Force@{Gravitational\+Force}!particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}}
+\subsubsection{\texorpdfstring{Gravitational\+Force()}{GravitationalForce()}}
+{\footnotesize\ttfamily vec3 Gravitational\+Force (\begin{DoxyParamCaption}\item[{\hyperlink{struct_particle}{Particle}}]{p1,  }\item[{\hyperlink{struct_particle}{Particle}}]{p2 }\end{DoxyParamCaption})}
+
+
+
+Calculates the gravitational force between two point masses. 
+
+Note\+: A particle with negative mass will reverse the direction of the force. Two particles with negative mass will behave normally
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & Point mass 1 \\
+\hline
+{\em p2} & Point mass 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector pointing from p2 to p1 with magnitude equal to the gravitational force between them 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{particle__attraction_8comp_a41cc0a0d722413ed428da01e38311893}\label{particle__attraction_8comp_a41cc0a0d722413ed428da01e38311893}} 
+\index{particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}!a\+Col@{a\+Col}}
+\index{a\+Col@{a\+Col}!particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}}
+\subsubsection{\texorpdfstring{a\+Col}{aCol}}
+{\footnotesize\ttfamily buffer a\+Col}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 color[]
+\end{DoxyCode}
+
+
+The buffer containing the colors of the particles. 
+
+\mbox{\Hypertarget{particle__attraction_8comp_a9f39e8aaa860ed0953f27908a3b221d0}\label{particle__attraction_8comp_a9f39e8aaa860ed0953f27908a3b221d0}} 
+\index{particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}!a\+Pos@{a\+Pos}}
+\index{a\+Pos@{a\+Pos}!particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}}
+\subsubsection{\texorpdfstring{a\+Pos}{aPos}}
+{\footnotesize\ttfamily buffer a\+Pos}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 position[]
+\end{DoxyCode}
+
+
+The buffer containing the positions of all of the particles. 
+
+\mbox{\Hypertarget{particle__attraction_8comp_a0a84961dad56c826078ff48a6581c791}\label{particle__attraction_8comp_a0a84961dad56c826078ff48a6581c791}} 
+\index{particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}!attractors@{attractors}}
+\index{attractors@{attractors}!particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}}
+\subsubsection{\texorpdfstring{attractors}{attractors}}
+{\footnotesize\ttfamily uniform \hyperlink{struct_particle}{Particle} attractors\mbox{[}N\+U\+M\+\_\+\+A\+T\+T\+R\+A\+C\+T\+O\+RS\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+    \hyperlink{struct_particle}{Particle}(vec3(0.0f, 10.0f, 0.0f),   1000000000000000.0f),
+    \hyperlink{struct_particle}{Particle}(vec3(-7.07f, -7.07f, 0.0f),1000000000000000.0f),
+    \hyperlink{struct_particle}{Particle}(vec3(7.07f, -7.07f, 0.0f), 1000000000000000.0f),
+\}
+\end{DoxyCode}
+\mbox{\Hypertarget{particle__attraction_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}\label{particle__attraction_8comp_a8873b6c4414371b20f8c9adb4fbb0b0e}} 
+\index{particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}!a\+Vel@{a\+Vel}}
+\index{a\+Vel@{a\+Vel}!particle\+\_\+attraction.\+comp@{particle\+\_\+attraction.\+comp}}
+\subsubsection{\texorpdfstring{a\+Vel}{aVel}}
+{\footnotesize\ttfamily buffer a\+Vel}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    vec4 velocity[]
+\end{DoxyCode}
+
+
+The buffer containing the velocities of the particles. 
+

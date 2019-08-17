@@ -1,0 +1,66 @@
+\hypertarget{class_camera}{}\section{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_camera_aabf058eb164d6936a18ec4e9f550cb71}{Camera} (glm\+::mat4 view\+Mat=glm\+::mat4(1.\+0f), glm\+::mat4 proj\+Mat=glm\+::mat4(1.\+0f))
+\begin{DoxyCompactList}\small\item\em Creates a camera with the specified matrices. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_camera_affa333055635aed96518c4c66be9a70c}{Get\+View\+Matrix} ()
+\begin{DoxyCompactList}\small\item\em Gets the view matrix This should be used for setting uniforms in shader programs. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{class_camera_ad4af021f577c6326881c3596d76f99e9}{Get\+Proj\+Matrix} ()
+\begin{DoxyCompactList}\small\item\em Gets the projection matrix This should be used for setting uniforms in shader programs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_camera_aabf058eb164d6936a18ec4e9f550cb71}\label{class_camera_aabf058eb164d6936a18ec4e9f550cb71}} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{Camera()}{Camera()}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{view\+Mat = {\ttfamily glm\+:\+:mat4(1.0f)},  }\item[{glm\+::mat4}]{proj\+Mat = {\ttfamily glm\+:\+:mat4(1.0f)} }\end{DoxyParamCaption})}
+
+
+
+Creates a camera with the specified matrices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Mat} & View Matrix (specifies where the camera is in world space) \\
+\hline
+{\em proj\+Mat} & Projection Matrix (specifies how the world is projected onto a 2D viewport) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_camera_ad4af021f577c6326881c3596d76f99e9}\label{class_camera_ad4af021f577c6326881c3596d76f99e9}} 
+\index{Camera@{Camera}!Get\+Proj\+Matrix@{Get\+Proj\+Matrix}}
+\index{Get\+Proj\+Matrix@{Get\+Proj\+Matrix}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{Get\+Proj\+Matrix()}{GetProjMatrix()}}
+{\footnotesize\ttfamily glm\+::mat4 Camera\+::\+Get\+Proj\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the projection matrix This should be used for setting uniforms in shader programs. 
+
+\begin{DoxyReturn}{Returns}
+projection matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_affa333055635aed96518c4c66be9a70c}\label{class_camera_affa333055635aed96518c4c66be9a70c}} 
+\index{Camera@{Camera}!Get\+View\+Matrix@{Get\+View\+Matrix}}
+\index{Get\+View\+Matrix@{Get\+View\+Matrix}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{Get\+View\+Matrix()}{GetViewMatrix()}}
+{\footnotesize\ttfamily glm\+::mat4 Camera\+::\+Get\+View\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the view matrix This should be used for setting uniforms in shader programs. 
+
+\begin{DoxyReturn}{Returns}
+view matrix 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_camera_8h}{Camera.\+h}\item 
+src/Camera.\+cpp\end{DoxyCompactItemize}
