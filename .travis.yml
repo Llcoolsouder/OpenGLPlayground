@@ -21,4 +21,5 @@ after_success:
         - git add -f docs/*
         - COMMIT_MESSAGE="Travis: Updating docs for build \#$TRAVIS_BUILD_NUMBER"
         - git commit -m $COMMIT_MESSAGE
-        - git push origin master
+        - REPO="https://llcoolsouder:${GH_TOKEN}"@github.com/Llcoolsouder/OpenGLPlayground.git"
+        - git push REPO master
