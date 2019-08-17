@@ -16,4 +16,4 @@ script:
   - make .
   - cd ..
 
-after_success: ./ci/after_success.sh
+after_success: ./ci/deploy_docs.sh
