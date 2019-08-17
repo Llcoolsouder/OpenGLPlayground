@@ -2,9 +2,6 @@ language: cpp
 os: linux
 dist: bionic
 sudo: required
-compiler:
-  - gcc
-  - clang
 branches:
   only:
   - master
@@ -13,16 +10,20 @@ env:
   - GH_REF="github.com/Llcoolsouder/OpenGLPlayground.git"
   - secure: BueXk+xUain4zOqmM5Ty0fug3ANztcS7qMUMN/QBSSCKTQFy7D2N2m1YUFBJjGdhzidbuUfANGMfxskSOcYNC495RlgWwdoKjBaJ1eNt52WCrG//sG3YeJ13jiNI8gsOoVIGJAFgmN2J1Ym5jCw8pMcHcEWvUmoWzj4f84UTR7OdblehqllzJBbEHiNH7EaUvVt9D8yl96CGS3sIKrLwUsi8HibAFOjbNzmLXb7OniNFmTKTCAAHe8myARBDMHt7qMnvWAAa8Cb1BkqS5TVAC4k562yuefMhlvjiMGr1cX+cM/D2lhOdWHju69lHM1txM8iFnplUTqxycbZgHOJwGl31hu280BZ/enow8rqq6svHTuiT685jW71yyKPTXmTez6Ew3Vi2NLVhSCI+Idbml/VhYSnT4qFYOzR2lgUtaj+zfoSBcPvpVnW8UHa2QbZz5zAiQU9suJeV9I1z0UZlChn+LWVe4u9CxFMZOaIaSl9N09WjL54qjr+cfAqCDE5uVdmFc8v370/FUsRrEYHFpUkoMaQ3QDObN+3xV0Zi+L8nEqc/z7BvxgRqWbEOLBtG7m5BEOg1iwC0cYuxGdd3z6Bw+/VHEBozEbOfWagRlwJtn8BNo4L5BdrWWETdUdbXZocNSBSpqqU6otRucymgcqM6EZUjQ2ndl5k3nvwxxjg=
 
-install:
-- sudo apt-get install -y libglew-dev
-- sudo apt-get install -y libglm-dev
-- sudo apt-get install -y libglfw3-dev
-- sudo apt-get install -y doxygen
-
-script:
-- mkdir build && cd build
-- cmake ..
-- make .
-- cd ..
-
-after_success: "./ci/deploy_docs.sh"
+jobs:
+  - stage: build
+    compiler:
+      - gcc
+      - clang
+    install:
+      - sudo apt-get install -y libglew-dev
+      - sudo apt-get install -y libglm-dev
+      - sudo apt-get install -y libglfw3-dev
+      - sudo apt-get install -y doxygen
+    script:
+      - mkdir build && cd build
+      - cmake ..
+      - make .
+      - cd ..
+  - stage: deploy_docs
+    script: "./ci/deploy_docs.sh"
