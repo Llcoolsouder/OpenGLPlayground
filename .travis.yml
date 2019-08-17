@@ -15,6 +15,6 @@ script:
   - mkdir build && cd build
   - cmake ..
   - make .
-  - cd ..e
+  - cd ..
 
 after_success: ./ci/deploy_docs.sh
