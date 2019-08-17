@@ -62,7 +62,35 @@ $(function() {
 <div class="title">OpenGL Playground [![Build Status](<a href="https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master">https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master</a>)](<a href="https://travis-ci.org/Llcoolsouder/OpenGLPlayground">https://travis-ci.org/Llcoolsouder/OpenGLPlayground</a>) </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This is just a mess of code created in my OpenGL studies.</p>
+<div class="textblock"><h1>Table of Contents</h1>
+<ol type="1">
+<li><a href="#description">Description</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#building">Building</a><ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#linux">Linux</a></li>
+</ul>
+</li>
+<li><a href="#examples">Examples (you should just skip to this)</a></li>
+</ol>
+<h2>Description <a class="anchor" id="description"></a></h2>
+<p>This is just a mess of code created in my OpenGL studies. All of the code is documented at <a href="https://llcoolsouder.github.io/OpenGLPlayground/index.html">https://llcoolsouder.github.io/OpenGLPlayground/index.html</a>; not because I think anyone will find it particularly useful, but because it's good practice.</p>
+<h2>Dependencies <a class="anchor" id="dependencies"></a></h2>
+<ul>
+<li>OpenGL 4.3 (for computer shaders)</li>
+<li>GLEW</li>
+<li>GLFW3</li>
+<li>GLM</li>
+<li>CMake (This was tested on version 3.15)</li>
+</ul>
+<h2>Building <a class="anchor" id="building"></a></h2>
+<p>Once all of the dependencies are installed, building should be as easy as </p><div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div><div class="line">cmake ..</div><div class="line">make .</div></div><!-- fragment --><h3>Windows <a class="anchor" id="windows"></a></h3>
+<p>For Windows, CMake will expect the dependencies to be installed in <code>C:/thirdparty/</code> At the time of making this, there has been a Windows update that blocks manual changes to <code>C:/Program Files (x86)/</code>, which is where CMake looks for most of these dependencies by default on Windows. The file structure should look like this:</p>
+<p>+&ndash; C:/thirdparty +&ndash; glew | +&ndash; include | +&ndash; lib/Win32/Release/ +&ndash; glfw3 | +&ndash; include | +&ndash; build/src/Release +&ndash; glm</p>
+<p>On Windows I built using the CMake-Gui. If you have this file structure, CMake should find everything except GLFW3 static libraries. You will have to give a path to glfw3.lib for GLFW3_LIBRARY.</p>
+<h3>Linux <a class="anchor" id="linux"></a></h3>
+<p>I built this on Ubuntu 16, and Travis currently tests on Ubuntu 18. You will need to run the following commands to install the dependencies. </p><div class="fragment"><div class="line">sudo apt-get install -y libglew-dev</div><div class="line">sudo apt-get install -y libglm-dev</div><div class="line">sudo apt-get install -y libglfw3-dev</div></div><!-- fragment --><p> <em><b>I needed to install CMake <b>3.15</b> in order to find GLEW properly.</b></em></p>
+<h2>Examples <a class="anchor" id="examples"></a></h2>
 <div class="image">
 <img src="https://github.com/Llcoolsouder/OpenGLPlayground/blob/master/samples/particle_attraction.gif" alt="alt text" title="Particles simulated on compute shaders"/>
 </div>
