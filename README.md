@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master)](https://travis-ci.org/Llcoolsouder/OpenGLPlayground)
-# OpenGL Playground
+# OpenGL Playground [![Build Status](https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master)](https://travis-ci.org/Llcoolsouder/OpenGLPlayground)
 
 This is just a mess of code created in my OpenGL studies.
 
