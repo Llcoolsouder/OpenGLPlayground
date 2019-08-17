@@ -9,10 +9,14 @@ env:
 
 matrix:
   include:
-  - os: linux
+  - os:
+    - linux
+    - windows
     dist: bionic
     sudo: required
-    compiler: gcc
+    compiler:
+      - gcc
+      - clang
 
 install:
 - sudo apt-get install -y libglew-dev
