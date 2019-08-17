@@ -7,5 +7,5 @@ doxygen Doxyfile
 git add -f docs/*
 COMMIT_MESSAGE="Travis: Updating docs for build #${TRAVIS_BUILD_NUMBER}"
 git commit -m "$COMMIT_MESSAGE"
-REPO="https://llcoolsouder:${GH_TOKEN}@github.com/Llcoolsouder/OpenGLPlayground.git"
-git push $REPO master
+git remote add origin-travis "https://${GH_TOKEN}@github.com/Llcoolsouder/OpenGLPlayground.git" > /dev/null 2>&1
+git push --quiet origin-travis master
