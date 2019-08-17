@@ -4,8 +4,8 @@
 1. [Description](#description)
 2. [Dependencies](#dependencies)
 3. [Building](#building)
-  - [Windows](#windows)
-  - [Linux](#linux)
+    - [Windows](#windows)
+    - [Linux](#linux)
 4. [Examples (you should just skip to this)](#examples)
 
 
