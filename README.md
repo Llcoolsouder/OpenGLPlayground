@@ -40,11 +40,11 @@ this:
 
 C:/thirdparty  
 |-- glew  
-|	|-- include/  
-|	\`-- lib/Win32/Release/  
+|   |-- include/  
+|   \`-- lib/Win32/Release/  
 |-- glfw3  
-|	|-- include  
-|	\`--build/src/Release/  
+|   |-- include  
+|   \`--build/src/Release/  
 \`-- glm  
 
 On Windows I built using the CMake-Gui. If you have this file structure,
