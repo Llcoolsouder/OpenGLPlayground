@@ -38,14 +38,16 @@ manual changes to `C:/Program Files (x86)/`, which is where CMake looks for most
 of these dependencies by default on Windows. The file structure should look like
 this:
 
-C:/thirdparty  
+<pre>
+C:/thirdparty/  
 |-- glew  
 |   |-- include/  
-|   \`-- lib/Win32/Release/  
+|   `-- lib/Win32/Release/  
 |-- glfw3  
-|   |-- include  
-|   \`--build/src/Release/  
-\`-- glm  
+|   |-- include/  
+|   `--build/src/Release/  
+`-- glm  
+</pre>
 
 On Windows I built using the CMake-Gui. If you have this file structure,
 CMake should find everything except GLFW3 static libraries. You will have
