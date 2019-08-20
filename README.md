@@ -41,11 +41,11 @@ this:
 C:/thirdparty  
 |-- glew  
 |	|-- include/  
-|	``-- lib/Win32/Release/  
+|	\`-- lib/Win32/Release/  
 |-- glfw3  
 |	|-- include  
-|	``--build/src/Release/  
-``-- glm  
+|	\`--build/src/Release/  
+\`-- glm  
 
 On Windows I built using the CMake-Gui. If you have this file structure,
 CMake should find everything except GLFW3 static libraries. You will have
