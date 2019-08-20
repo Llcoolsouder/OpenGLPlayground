@@ -86,7 +86,7 @@ $(function() {
 <h2>Building <a class="anchor" id="building"></a></h2>
 <p>Once all of the dependencies are installed, building should be as easy as </p><div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div><div class="line">cmake ..</div><div class="line">make .</div></div><!-- fragment --><h3>Windows <a class="anchor" id="windows"></a></h3>
 <p>For Windows, CMake will expect the dependencies to be installed in <code>C:/thirdparty/</code> At the time of making this, there has been a Windows update that blocks manual changes to <code>C:/Program Files (x86)/</code>, which is where CMake looks for most of these dependencies by default on Windows. The file structure should look like this:</p>
-<p>+&ndash; C:/thirdparty +&ndash; glew | +&ndash; include | +&ndash; lib/Win32/Release/ +&ndash; glfw3 | +&ndash; include | +&ndash; build/src/Release +&ndash; glm</p>
+<p>C:/thirdparty |&ndash; glew | |&ndash; include/ | ``&ndash; lib/Win32/Release/ |&ndash; glfw3 | |&ndash; include | <code>--build/src/Release/ </code>&ndash; glm</p>
 <p>On Windows I built using the CMake-Gui. If you have this file structure, CMake should find everything except GLFW3 static libraries. You will have to give a path to glfw3.lib for GLFW3_LIBRARY.</p>
 <h3>Linux <a class="anchor" id="linux"></a></h3>
 <p>I built this on Ubuntu 16, and Travis currently tests on Ubuntu 18. You will need to run the following commands to install the dependencies. </p><div class="fragment"><div class="line">sudo apt-get install -y libglew-dev</div><div class="line">sudo apt-get install -y libglm-dev</div><div class="line">sudo apt-get install -y libglfw3-dev</div></div><!-- fragment --><p> <em><b>I needed to install CMake <b>3.15</b> in order to find GLEW properly.</b></em></p>
