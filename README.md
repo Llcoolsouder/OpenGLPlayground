@@ -38,18 +38,18 @@ manual changes to `C:/Program Files (x86)/`, which is where CMake looks for most
 of these dependencies by default on Windows. The file structure should look like
 this:
 
-+-- C:/thirdparty
-  +-- glew
-  | +-- include
-  | +-- lib/Win32/Release/
-  +-- glfw3
-  | +-- include
-  | +-- build/src/Release
-  +-- glm
+C:/thirdparty  
+|-- glew  
+|	|-- include/  
+|	`-- lib/Win32/Release/  
+|-- glfw3  
+|	|-- include  
+|	`--build/src/Release/  
+`-- glm  
 
-  On Windows I built using the CMake-Gui. If you have this file structure,
-  CMake should find everything except GLFW3 static libraries. You will have
-  to give a path to glfw3.lib for GLFW3_LIBRARY.
+On Windows I built using the CMake-Gui. If you have this file structure,
+CMake should find everything except GLFW3 static libraries. You will have
+to give a path to glfw3.lib for GLFW3_LIBRARY.
 
 ### Linux <a name="linux"></a>
 I built this on Ubuntu 16, and Travis currently tests on Ubuntu 18.
