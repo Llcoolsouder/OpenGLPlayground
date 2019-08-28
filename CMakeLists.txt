@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 set (CMAKE_CXX_STANDARD 11)
 project(OpenGLPlayground)
 
@@ -9,10 +9,6 @@ file(GLOB
 file(GLOB_RECURSE
 	HEADER_FILES
 	${CMAKE_SOURCE_DIR}/include/*.h)
-# file(GLOB_RECURSE
-	# SHADER_FILES
-	# ${CMAKE_SOURCE_DIR}/shaders/*)
-	# message(${SHADER_FILES})
 
 # Create executable
 add_executable(
@@ -32,45 +28,35 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	PROPERTIES
 	LINK_FLAGS
 	/SUBSYSTEM:CONSOLE)
+	
+	# Add project filters
+	source_group(
+		"Source"
+		FILES
+		${SOURCE_FILES})
+	source_group(
+		"Headers"
+		FILES
+		${HEADER_FILES})
+	# source_group("Shaders" REGULAR_EXPRESSION "[vert,geom,frag,comp]$")
 
 	set(GLEW_USE_STATIC_LIBS TRUE)
+	ADD_DEFINITIONS(-DGLEW_STATIC )
 
 	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew")
-	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew/lib/Release/Win32")
-	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew/bin/Release/Win32")
 endif()
 
-# Add project filters
-source_group(
-	"Source"
-	FILES
-	${SOURCE_FILES})
-source_group(
-	"Headers"
-	FILES
-	${HEADER_FILES})
-# source_group(
-	# "Shaders"
-	# FILES
-	# ${SHADER_FILES})
-
 # Find external libraries
-# find_file(
-	# GLEW_DLL
-	# "glew32.dll")
-
-# add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-		   # COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		   # ${GLEW_DLL}
-			# $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-
 set(CMAKE_MODULE_PATH
 	${CMAKE_MODULE_PATH}
 	"${CMAKE_SOURCE_DIR}/cmake/")
+	
 find_package(OpenGL REQUIRED OpenGL)
+
 find_package(GLM REQUIRED)
 message(STATUS
 	"GLM included at ${GLM_INCLUDE_DIR}")
+	
 find_package(GLFW3 REQUIRED)
 message(STATUS
 	"GLFW3 included at ${GLFW3_INCLUDE_DIR}")
@@ -93,7 +79,7 @@ target_link_libraries(
 set(ADDITIONAL_INCLUDES
 	${GLM_INCLUDE_DIR}
 	${GLFW3_INCLUDE_DIR}
-	${GLEW_INCLUDE_DIR})
+	${GLEW_INCLUDE_DIRS})
 target_include_directories(
 	${PROJECT_NAME}
 	PUBLIC
