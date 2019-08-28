@@ -47,12 +47,6 @@ Shader::Shader(const std::vector<std::string>& Filenames)
     }
   }
 
-  // Set all vertex attribute pointers
-  std::for_each(
-    mVertexAttribs.begin(),
-    mVertexAttribs.end(),
-    [this](const std::pair<std::string, ShaderParameter> Attrib) { SetVertexAttrib(Attrib); });
-
   // Get all uniforms
   int NumSupUniforms = sizeof(SupportedUniforms) / sizeof(SupportedUniforms[0]);
   for (int i = 0; i < NumSupUniforms; i++)
@@ -85,10 +79,12 @@ void Shader::Use()
 //-----------------------------------------------------------------------------
 bool Shader::SetUniform(const std::string& name, const void* data)
 {
-  glUseProgram(mProgramID);
   std::map<std::string, ShaderParameter>::iterator iUniform = mUniforms.find(name);
   if (iUniform == mUniforms.end())
   {
+    std::cerr
+      << "The Shader module does not support any uniforms with the name: "
+      << name << std::endl;
     return false;
   }
 
@@ -114,13 +110,22 @@ bool Shader::SetUniform(const std::string& name, const void* data)
   }
 }
 
-//=============================================================================
-//=============================================================================
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void Shader::SetVertexAttrib(std::pair<std::string, ShaderParameter> Attrib)
+void Shader::SetAllVertexAttribPointers()
 {
-  glUseProgram(mProgramID);
+  std::for_each(
+    mVertexAttribs.begin(),
+    mVertexAttribs.end(),
+    [this](const std::pair<std::string, ShaderParameter> Attrib) { SetVertexAttribPointer(Attrib); });
+}
+
+//=============================================================================
+//=============================================================================
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void Shader::SetVertexAttribPointer(std::pair<std::string, ShaderParameter> Attrib)
+{
   ShaderParameter param = Attrib.second;
   glVertexAttribPointer(
     param.Location,

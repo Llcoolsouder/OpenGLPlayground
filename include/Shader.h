@@ -50,6 +50,13 @@ public:
    */
   bool SetUniform(const std::string& name, const void* data);
 
+  /**
+   * Sets all vertex attribute pointers to their places
+   * in the currently bound vertex buffer.
+   * NOTE: This MUST be called after a new buffer is bound.
+   */
+  void SetAllVertexAttribPointers();
+
 private:
 
   struct ShaderParameter
@@ -61,7 +68,7 @@ private:
     int Offset; /// Offset in interleaved vertex buffer
   };
 
-  void SetVertexAttrib(const std::pair<std::string, ShaderParameter> Attrib);
+  void SetVertexAttribPointer(const std::pair<std::string, ShaderParameter> Attrib);
 
   int GetSizeofGLType(int type);
 
