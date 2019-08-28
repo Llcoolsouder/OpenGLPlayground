@@ -71,12 +71,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aabf058eb164d6936a18ec4e9f550cb71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#aabf058eb164d6936a18ec4e9f550cb71">Camera</a> (glm::mat4 viewMat=glm::mat4(1.0f), glm::mat4 projMat=glm::mat4(1.0f))</td></tr>
 <tr class="memdesc:aabf058eb164d6936a18ec4e9f550cb71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a camera with the specified matrices.  <a href="#aabf058eb164d6936a18ec4e9f550cb71">More...</a><br /></td></tr>
 <tr class="separator:aabf058eb164d6936a18ec4e9f550cb71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affa333055635aed96518c4c66be9a70c"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#affa333055635aed96518c4c66be9a70c">GetViewMatrix</a> ()</td></tr>
-<tr class="memdesc:affa333055635aed96518c4c66be9a70c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the view matrix This should be used for setting uniforms in shader programs.  <a href="#affa333055635aed96518c4c66be9a70c">More...</a><br /></td></tr>
-<tr class="separator:affa333055635aed96518c4c66be9a70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4af021f577c6326881c3596d76f99e9"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#ad4af021f577c6326881c3596d76f99e9">GetProjMatrix</a> ()</td></tr>
-<tr class="memdesc:ad4af021f577c6326881c3596d76f99e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the projection matrix This should be used for setting uniforms in shader programs.  <a href="#ad4af021f577c6326881c3596d76f99e9">More...</a><br /></td></tr>
-<tr class="separator:ad4af021f577c6326881c3596d76f99e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a00aa16a14f0e251de00bf056516ed"><td class="memItemLeft" align="right" valign="top">const glm::mat4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#a59a00aa16a14f0e251de00bf056516ed">GetViewMatrix</a> () const</td></tr>
+<tr class="memdesc:a59a00aa16a14f0e251de00bf056516ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the view matrix This should be used for setting uniforms in shader programs.  <a href="#a59a00aa16a14f0e251de00bf056516ed">More...</a><br /></td></tr>
+<tr class="separator:a59a00aa16a14f0e251de00bf056516ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b1f23dfebde312930d037ad1332ca2"><td class="memItemLeft" align="right" valign="top">const glm::mat4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#a93b1f23dfebde312930d037ad1332ca2">GetProjMatrix</a> () const</td></tr>
+<tr class="memdesc:a93b1f23dfebde312930d037ad1332ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the projection matrix This should be used for setting uniforms in shader programs.  <a href="#a93b1f23dfebde312930d037ad1332ca2">More...</a><br /></td></tr>
+<tr class="separator:a93b1f23dfebde312930d037ad1332ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aabf058eb164d6936a18ec4e9f550cb71"></a>
@@ -117,8 +117,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad4af021f577c6326881c3596d76f99e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4af021f577c6326881c3596d76f99e9">&#9670;&nbsp;</a></span>GetProjMatrix()</h2>
+<a id="a93b1f23dfebde312930d037ad1332ca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b1f23dfebde312930d037ad1332ca2">&#9670;&nbsp;</a></span>GetProjMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -127,10 +127,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">glm::mat4 Camera::GetProjMatrix </td>
+          <td class="memname">const glm::mat4&amp; Camera::GetProjMatrix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -145,8 +145,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="affa333055635aed96518c4c66be9a70c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affa333055635aed96518c4c66be9a70c">&#9670;&nbsp;</a></span>GetViewMatrix()</h2>
+<a id="a59a00aa16a14f0e251de00bf056516ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a00aa16a14f0e251de00bf056516ed">&#9670;&nbsp;</a></span>GetViewMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,10 +155,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">glm::mat4 Camera::GetViewMatrix </td>
+          <td class="memname">const glm::mat4&amp; Camera::GetViewMatrix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
