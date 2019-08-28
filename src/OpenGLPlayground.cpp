@@ -125,7 +125,7 @@ int main()
   const float zero = 0.0f;
 
   // Shader Const uniforms
-  glm::vec4 triangle_uColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+  glm::vec4 triangle_uColor = { 0.6f, 0.0f, 1.0f, 1.0f };
 
   // Camera Setup
   glm::mat4 viewMat = glm::lookAt(
@@ -153,8 +153,9 @@ int main()
     
     // Draw Triangle
     TriangleShader.Use();
-    //TriangleShader.SetUniform("uColor", &triangle_uColor)
+    TriangleShader.SetUniform("uColor", &triangle_uColor);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    TriangleShader.SetAllVertexAttribPointers();
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glUseProgram(0);
