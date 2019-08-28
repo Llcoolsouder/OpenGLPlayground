@@ -30,7 +30,7 @@ public:
    *
    * @return view matrix
    */
-  inline glm::mat4 GetViewMatrix() { return mViewMatrix; }
+  inline const glm::mat4& GetViewMatrix() const { return mViewMatrix; }
 
   /**
    * Gets the projection matrix
@@ -38,7 +38,7 @@ public:
    *
    * @return projection matrix
    */
-  inline glm::mat4 GetProjMatrix() { return mProjMatrix; }
+  inline const glm::mat4& GetProjMatrix() const { return mProjMatrix; }
 
 private:
   glm::mat4 mViewMatrix;
