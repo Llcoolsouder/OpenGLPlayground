@@ -33,6 +33,7 @@
 #include <chrono>
 #include <math.h>
 #include <tuple>
+#include <memory>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -42,8 +43,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "ShaderUtilities.h"
-#include "Shader.h"
-#include "Mesh.h"
+//#include "Shader.h"
+//#include "Mesh.h"
+#include "Model.h"
 #include "Camera.h"
 
 void cleanup()
@@ -100,33 +102,6 @@ int main()
 
   glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 
-  std::vector<glm::vec3> vertices =
-  {{-0.5f, -0.5f, 0.0f},
-  {0.5f, -0.5f, 0.0f},
-  {0.0f,  0.5f, 0.0f}};
-
-  std::vector<unsigned int> indices =
-  {
-    0, 1, 2
-  };
-
-  Mesh Triangle(vertices, indices);
-
-  const std::string ShaderFolder = "../shaders/";
-  std::vector<std::string> ShaderFiles;
-  ShaderFiles.push_back(ShaderFolder + "solid.vert");
-  ShaderFiles.push_back(ShaderFolder + "solid.frag");
-  Shader TriangleShader(ShaderFiles);
-
-  // Timer
-  std::chrono::system_clock::time_point FrameStart;
-  float deltaTime = 0.0f;
-  float uTime = 0.0f;
-  const float zero = 0.0f;
-
-  // Shader Const uniforms
-  glm::vec4 triangle_uColor = { 0.6f, 0.0f, 1.0f, 1.0f };
-
   // Camera Setup
   glm::mat4 viewMat = glm::lookAt(
     glm::vec3(0.0f, 0.0f, -5.0f),
@@ -140,29 +115,65 @@ int main()
     1000.0f);
   Camera mainCamera(viewMat, projMat);
 
+  // Create Mesh
+  std::vector<glm::vec3> vertices =
+  {{-0.5f, -0.5f, 0.0f},
+  {0.5f, -0.5f, 0.0f},
+  {0.0f,  0.5f, 0.0f}};
+
+  std::vector<unsigned int> indices =
+  {
+    0, 1, 2
+  };
+
+  std::shared_ptr<Mesh> pTriangleMesh = std::make_shared<Mesh>(vertices, indices);
+
+  // Create shader program
+  const std::string ShaderFolder = "../shaders/";
+  std::vector<std::string> ShaderFiles;
+  ShaderFiles.push_back(ShaderFolder + "solid.vert");
+  ShaderFiles.push_back(ShaderFolder + "solid.frag");
+  std::shared_ptr<Shader> pTriangleShader = std::make_shared<Shader>(ShaderFiles);
+
+  // Shader uniforms (Note mutability)
+  std::shared_ptr<glm::vec4> puColor = 
+    std::make_shared<glm::vec4>(0.6f, 0.0f, 1.0f, 1.0f);
+
+  std::shared_ptr<glm::mat4> puvModelMatrix =
+    std::make_shared<glm::mat4>(1.0f);
+
+  std::shared_ptr<const glm::mat4> puvViewMatrix = mainCamera.GetViewMatrix();
+  std::shared_ptr<const glm::mat4> puvProjMatrix = mainCamera.GetProjMatrix();
+  std::vector<Model::UniformData> TriangleUniforms =
+  {
+    Model::UniformData("uColor", puColor),
+    Model::UniformData("uvModelMatrix", puvModelMatrix),
+    Model::UniformData("uvViewMatrix", puvViewMatrix),
+    Model::UniformData("uvProjMatrix", puvProjMatrix)
+  };
+
   // Model setup
-  glm::mat4 uvModelMatrix = glm::mat4(1.0f);
+  Model Triangle(pTriangleMesh, pTriangleShader, TriangleUniforms);
 
-  TriangleShader.Use();
-  TriangleShader.SetUniform("uvProjMatrix", &mainCamera.GetProjMatrix());
-  TriangleShader.SetUniform("uvViewMatrix", &mainCamera.GetViewMatrix());
+  // Timer
+  std::chrono::system_clock::time_point FrameStart;
+  float deltaTime = 0.0f;
+  float uTime = 0.0f;
 
+  //*****************************************************************************
+  // Main Loop
+  //*****************************************************************************
   while (!glfwWindowShouldClose(window))
   {
     FrameStart = std::chrono::system_clock::now();
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    uvModelMatrix = glm::mat4(1.0f);
-    uvModelMatrix = glm::translate(uvModelMatrix, glm::vec3(std::sin(uTime), 0.0, 0.0));
-    uvModelMatrix = glm::rotate(uvModelMatrix, glm::radians(45.0f) * uTime, glm::vec3(0, 1, 0));
-    TriangleShader.SetUniform("uvModelMatrix", (GLfloat*)&uvModelMatrix);
+    *puvModelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(std::sin(uTime), 0.0, 0.0));
+    *puvModelMatrix = glm::rotate(*puvModelMatrix, glm::radians(45.0f) * uTime, glm::vec3(0, 1, 0));
     
     // Draw Triangle
-    Triangle.Bind();
-    TriangleShader.SetAllVertexAttribPointers();
-    TriangleShader.SetUniform("uColor", &triangle_uColor);
-    TriangleShader.Use();
+    Triangle.Update();
     Triangle.Draw();
 
     glUseProgram(0);

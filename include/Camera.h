@@ -10,6 +10,8 @@
 
 #include <glm/glm.hpp>
 
+#include <memory>
+
 class Camera
 {
 public:
@@ -30,7 +32,7 @@ public:
    *
    * @return view matrix
    */
-  inline const glm::mat4& GetViewMatrix() const { return mViewMatrix; }
+  inline std::shared_ptr<const glm::mat4> GetViewMatrix() const { return mpViewMatrix; }
 
   /**
    * Gets the projection matrix
@@ -38,9 +40,9 @@ public:
    *
    * @return projection matrix
    */
-  inline const glm::mat4& GetProjMatrix() const { return mProjMatrix; }
+  inline std::shared_ptr<const glm::mat4> GetProjMatrix() const { return mpProjMatrix; }
 
 private:
-  glm::mat4 mViewMatrix;
-  glm::mat4 mProjMatrix;
+  std::shared_ptr<glm::mat4> mpViewMatrix;
+  std::shared_ptr<glm::mat4> mpProjMatrix;
 };
