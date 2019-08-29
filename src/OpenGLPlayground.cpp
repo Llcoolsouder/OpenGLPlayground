@@ -43,6 +43,7 @@
 
 #include "ShaderUtilities.h"
 #include "Shader.h"
+#include "Mesh.h"
 #include "Camera.h"
 
 void cleanup()

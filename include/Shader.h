@@ -20,7 +20,7 @@ class Shader
 public:
 
   Shader() = delete;
-  Shader(const Shader& rhs) = delete;
+  Shader(const Shader& other) = delete;
 
   /**
    * Loads, compiles, and links a shader program
@@ -52,7 +52,9 @@ public:
 
   /**
    * Sets all vertex attribute pointers to their places
-   * in the currently bound vertex buffer.
+   * in the currently bound vertex buffer. This assumes that 
+   * the currently bound buffer is an interleaved buffer
+   * containing ALL of the attributes specified in this shader.
    * NOTE: This MUST be called after a new buffer is bound.
    */
   void SetAllVertexAttribPointers();
