@@ -38,6 +38,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "ShaderUtilities.h"
 #include "Shader.h"
@@ -129,7 +131,7 @@ int main()
 
   // Camera Setup
   glm::mat4 viewMat = glm::lookAt(
-    glm::vec3(0.0f, 0.0f, -20.0f),
+    glm::vec3(0.0f, 0.0f, -5.0f),
     glm::vec3(0.0f, 0.0f, 0.0f),
     glm::vec3(0.0f, 1.0f, 0.0f)
   );
@@ -140,16 +142,23 @@ int main()
     1000.0f);
   Camera mainCamera(viewMat, projMat);
 
+  // Model setup
+  glm::mat4 uvModelMatrix = glm::mat4(1.0f);
+
   TriangleShader.Use();
   TriangleShader.SetUniform("uvProjMatrix", &mainCamera.GetProjMatrix());
   TriangleShader.SetUniform("uvViewMatrix", &mainCamera.GetViewMatrix());
-
 
   while (!glfwWindowShouldClose(window))
   {
     FrameStart = std::chrono::system_clock::now();
 
     glClear(GL_COLOR_BUFFER_BIT);
+
+    uvModelMatrix = glm::mat4(1.0f);
+    uvModelMatrix = glm::translate(uvModelMatrix, glm::vec3(std::sin(uTime), 0.0, 0.0));
+    uvModelMatrix = glm::rotate(uvModelMatrix, glm::radians(45.0f) * uTime, glm::vec3(0, 1, 0));
+    TriangleShader.SetUniform("uvModelMatrix", (GLfloat*)&uvModelMatrix);
     
     // Draw Triangle
     TriangleShader.Use();

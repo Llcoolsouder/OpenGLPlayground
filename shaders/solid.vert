@@ -22,7 +22,7 @@ uniform mat4 uvModelMatrix = mat4(1.0f);
 uniform vec4 uColor = vec4(1.0f, 1.0f, 1.0f, 1.0f); 
 
 /** A vec4 specifying position of the vertex; The only input for this shader */
-layout(location = 0) in vec4 aPosition;
+layout(location = 0) in vec3 aPosition;
 
 /** Interface block */
 out VERT_DATA {
@@ -31,6 +31,6 @@ out VERT_DATA {
 
 void main()
 {
-	gl_Position = uvProjMatrix * uvViewMatrix * uvModelMatrix * aPosition;
+	gl_Position = uvProjMatrix * uvViewMatrix * uvModelMatrix * vec4(aPosition, 1.0);
 	vs_out.vColor = uColor;
 }

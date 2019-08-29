@@ -53,7 +53,7 @@ Shader::Shader(const std::vector<std::string>& Filenames)
   {
     ShaderParameter uniform(SupportedUniforms[i]);
     uniform.Location = glGetUniformLocation(mProgramID, uniform.Name);
-    if (uniform.Location != 1)
+    if (uniform.Location != -1)
     {
       mUniforms.insert(std::pair<std::string, ShaderParameter>(uniform.Name, uniform));
     }
@@ -79,6 +79,7 @@ void Shader::Use()
 //-----------------------------------------------------------------------------
 bool Shader::SetUniform(const std::string& name, const void* data)
 {
+  glUseProgram(mProgramID);
   std::map<std::string, ShaderParameter>::iterator iUniform = mUniforms.find(name);
   if (iUniform == mUniforms.end())
   {
