@@ -9,4 +9,3 @@ do
 	line=${line//$"//"/}
 	echo " - [ ] ${line}\n" >> TODO.md
 done <<< "$TODOS"
-
