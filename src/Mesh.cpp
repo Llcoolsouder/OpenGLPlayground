@@ -54,12 +54,12 @@ Mesh::Mesh(std::vector<glm::vec3> aPositions,
   glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
   glBufferData(GL_ARRAY_BUFFER,
     VertexBuffer.size() * sizeof(VertexBuffer[0]),
-    VertexBuffer.data,
+    VertexBuffer.data(),
     GL_STATIC_DRAW);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mElementBufferID);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER,
     Indices.size() * sizeof(Indices[0]),
-    Indices.data,
+    Indices.data(),
     GL_STATIC_DRAW);
   glBindVertexArray(0);
 }
@@ -78,6 +78,13 @@ Mesh::~Mesh()
 void Mesh::Bind() const
 {
   glBindVertexArray(mVAO);
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void Mesh::Draw() const
+{
+  glDrawElements(mDrawMode, mNumVertices, GL_UNSIGNED_INT, (void*)0);
 }
 
 //=============================================================================

@@ -79,7 +79,6 @@ void Shader::Use()
 //-----------------------------------------------------------------------------
 bool Shader::SetUniform(const std::string& name, const void* data)
 {
-  glUseProgram(mProgramID);
   std::map<std::string, ShaderParameter>::iterator iUniform = mUniforms.find(name);
   if (iUniform == mUniforms.end())
   {
@@ -89,6 +88,7 @@ bool Shader::SetUniform(const std::string& name, const void* data)
     return false;
   }
 
+  glUseProgram(mProgramID);
   if (iUniform->second.TYPE == GL_FLOAT)
   {
     switch (iUniform->second.NumItems)
@@ -99,14 +99,17 @@ bool Shader::SetUniform(const std::string& name, const void* data)
       default:
       {
         std::cerr << "Shader module does not support " << iUniform->second.NumItems << " floats" << std::endl;
+        glUseProgram(0);
         return false;
       }
+      glUseProgram(0);
       return true;
     }
   }
   else
   {
     std::cerr << "The uniform type specified is not yet supported." << std::endl;
+    glUseProgram(0);
     return false;
   }
 }

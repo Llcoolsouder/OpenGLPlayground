@@ -43,6 +43,11 @@ public:
    */
   void Bind() const;
 
+  /**
+   * Draws the mesh using the currently bound shader
+   */
+  void Draw() const;
+
 private:
 
   void PushPosition(std::vector<float>&, const glm::vec3&) const;

@@ -100,20 +100,17 @@ int main()
 
   glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 
-  glm::vec3  vertices[] =
+  std::vector<glm::vec3> vertices =
   {{-0.5f, -0.5f, 0.0f},
   {0.5f, -0.5f, 0.0f},
   {0.0f,  0.5f, 0.0f}};
 
-  GLuint VAO;
-  glGenVertexArrays(1, &VAO);
-  glBindVertexArray(VAO);
+  std::vector<unsigned int> indices =
+  {
+    0, 1, 2
+  };
 
-  GLuint vertexBuffer;
-  glGenBuffers(1, &vertexBuffer);
-  glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  Mesh Triangle(vertices, indices);
 
   const std::string ShaderFolder = "../shaders/";
   std::vector<std::string> ShaderFiles;
@@ -162,14 +159,14 @@ int main()
     TriangleShader.SetUniform("uvModelMatrix", (GLfloat*)&uvModelMatrix);
     
     // Draw Triangle
-    TriangleShader.Use();
-    TriangleShader.SetUniform("uColor", &triangle_uColor);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    Triangle.Bind();
     TriangleShader.SetAllVertexAttribPointers();
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    TriangleShader.SetUniform("uColor", &triangle_uColor);
+    TriangleShader.Use();
+    Triangle.Draw();
 
     glUseProgram(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
