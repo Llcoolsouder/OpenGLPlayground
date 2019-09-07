@@ -182,8 +182,8 @@ int main()
     glfwSwapBuffers(window);
     glfwPollEvents();
 
-    deltaTime = (float)(std::chrono::duration_cast<std::chrono::milliseconds>
-      (std::chrono::system_clock::now() - FrameStart).count()) / 1000.0f;
+    deltaTime = (float)(std::chrono::duration_cast<std::chrono::nanoseconds>
+      (std::chrono::system_clock::now() - FrameStart).count()) / 1000000000.0f;
     //std::cout << deltaTime << std::endl;
     uTime += deltaTime;
   }
