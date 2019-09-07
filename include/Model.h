@@ -13,7 +13,8 @@
 
 #include <memory>
 
-class Model {
+class Model
+{
 public:
 	/// Shorthand for uniform data needed by Model
 	typedef std::pair<std::string, std::shared_ptr<const void> > UniformData;
@@ -29,8 +30,8 @@ public:
    * Creates a model with the given mesh and shader program
    */
 	Model(const std::shared_ptr<Mesh> pMesh,
-			const std::shared_ptr<Shader> pShader,
-			const std::vector<UniformData> Uniforms = {});
+		const std::shared_ptr<Shader> pShader,
+		const std::vector<UniformData> Uniforms = {});
 
 	/**
    * Releases shared pointers to data

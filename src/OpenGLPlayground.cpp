@@ -48,20 +48,24 @@
 #include "Camera.h"
 #include "Model.h"
 
-void cleanup() {
+void cleanup()
+{
 	glfwTerminate();
 	getchar();
 }
 
-void kill() {
+void kill()
+{
 	cleanup();
 	exit(1);
 }
 
-int main() {
+int main()
+{
 	GLFWwindow *window;
 
-	if (!glfwInit()) {
+	if (!glfwInit())
+	{
 		std::cerr << "Failed to initialize GLFW library" << std::endl;
 		kill();
 		return -1;
@@ -71,22 +75,28 @@ int main() {
 	const std::tuple<float, float> AspectRatio = std::tuple<float, float>(16.0f, 9.0f);
 	const int WindowSize = 100;
 	window = glfwCreateWindow(
-			WindowSize * std::get<0>(AspectRatio),
-			WindowSize * std::get<1>(AspectRatio),
-			"OpenGL Playground", NULL, NULL);
+		WindowSize * std::get<0>(AspectRatio),
+		WindowSize * std::get<1>(AspectRatio),
+		"OpenGL Playground", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
-	if (glewInit() != GLEW_OK) {
+	if (glewInit() != GLEW_OK)
+	{
 		std::cerr << "Failed to initialize OpenGL" << std::endl;
 		kill();
 		return -1;
 	}
 
-	if (glewIsSupported("GL_VERSION_4_3")) {
+	if (glewIsSupported("GL_VERSION_4_3"))
+	{
 		std::cout << " Version 4.3 supported!" << std::endl;
-	} else if (glewIsSupported("GL_VERSION_4_1")) {
+	}
+	else if (glewIsSupported("GL_VERSION_4_1"))
+	{
 		std::cout << "Version 4.1 supported" << std::endl;
-	} else {
+	}
+	else
+	{
 		std::cout << "Maybe we should update the drivers" << std::endl;
 	}
 
@@ -94,14 +104,14 @@ int main() {
 
 	// Camera Setup
 	glm::mat4 viewMat = glm::lookAt(
-			glm::vec3(0.0f, 0.0f, -5.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::vec3(0.0f, 0.0f, -5.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 projMat = glm::perspective(
-			glm::radians(100.0f),
-			std::get<0>(AspectRatio) / std::get<1>(AspectRatio),
-			0.01f,
-			1000.0f);
+		glm::radians(100.0f),
+		std::get<0>(AspectRatio) / std::get<1>(AspectRatio),
+		0.01f,
+		1000.0f);
 	Camera mainCamera(viewMat, projMat);
 
 	// Create Mesh
@@ -124,10 +134,10 @@ int main() {
 
 	// Shader uniforms (Note mutability)
 	std::shared_ptr<glm::vec4> puColor =
-			std::make_shared<glm::vec4>(0.6f, 0.0f, 1.0f, 1.0f);
+		std::make_shared<glm::vec4>(0.6f, 0.0f, 1.0f, 1.0f);
 
 	std::shared_ptr<glm::mat4> puvModelMatrix =
-			std::make_shared<glm::mat4>(1.0f);
+		std::make_shared<glm::mat4>(1.0f);
 
 	std::shared_ptr<const glm::mat4> puvViewMatrix = mainCamera.GetViewMatrix();
 	std::shared_ptr<const glm::mat4> puvProjMatrix = mainCamera.GetProjMatrix();
@@ -149,7 +159,8 @@ int main() {
 	//*****************************************************************************
 	// Main Loop
 	//*****************************************************************************
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window))
+	{
 		FrameStart = std::chrono::system_clock::now();
 
 		glClear(GL_COLOR_BUFFER_BIT);

@@ -10,7 +10,8 @@
 
 #include "SceneNode.h"
 
-class SceneGraph : SceneNode {
+class SceneGraph : SceneNode
+{
 public:
 	virtual void Update() = 0;
 

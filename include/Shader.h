@@ -15,7 +15,8 @@
 #include <string>
 #include <vector>
 
-class Shader {
+class Shader
+{
 public:
 	Shader() = delete;
 	Shader(const Shader &other) = delete;
@@ -58,7 +59,8 @@ public:
 	void SetAllVertexAttribPointers();
 
 private:
-	struct ShaderParameter {
+	struct ShaderParameter
+	{
 		char Name[16]; /// Data name from shader source
 		int TYPE; /// Data type
 		unsigned int NumItems; /// How many datum make up this object

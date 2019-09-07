@@ -12,7 +12,8 @@
 
 #include <memory>
 
-class Camera {
+class Camera
+{
 public:
 	/**
    * Creates a camera with the specified matrices
@@ -21,8 +22,8 @@ public:
    * @param projMat Projection Matrix (specifies how the world is projected onto a 2D viewport)
    */
 	Camera(
-			glm::mat4 viewMat = glm::mat4(1.0f),
-			glm::mat4 projMat = glm::mat4(1.0f));
+		glm::mat4 viewMat = glm::mat4(1.0f),
+		glm::mat4 projMat = glm::mat4(1.0f));
 
 	/**
    * Gets the view matrix

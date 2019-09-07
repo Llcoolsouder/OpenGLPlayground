@@ -12,11 +12,13 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-std::string LSShaderUtilities::LoadFile(const std::string &FilePath) {
+std::string LSShaderUtilities::LoadFile(const std::string &FilePath)
+{
 	std::ifstream File(FilePath);
 	std::string FileContents;
 
-	if (File.is_open()) {
+	if (File.is_open())
+	{
 		std::stringstream Buffer;
 		Buffer << File.rdbuf();
 		FileContents = Buffer.str();
@@ -27,28 +29,41 @@ std::string LSShaderUtilities::LoadFile(const std::string &FilePath) {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GLuint LSShaderUtilities::LoadShader(const std::string &FilePath) {
+GLuint LSShaderUtilities::LoadShader(const std::string &FilePath)
+{
 	std::size_t extensionPos = FilePath.rfind('.');
 	std::string extension;
 
-	if (extensionPos != std::string::npos) {
+	if (extensionPos != std::string::npos)
+	{
 		extension =
-				FilePath.substr(extensionPos, FilePath.length() - extensionPos);
-	} else {
+			FilePath.substr(extensionPos, FilePath.length() - extensionPos);
+	}
+	else
+	{
 		std::cerr << "ERROR: Unable to get file extension. " << std::endl;
 		return (GLuint)0;
 	}
 
 	GLenum ShaderType;
-	if (extension == ".vert") {
+	if (extension == ".vert")
+	{
 		ShaderType = GL_VERTEX_SHADER;
-	} else if (extension == ".geom") {
+	}
+	else if (extension == ".geom")
+	{
 		ShaderType = GL_GEOMETRY_SHADER;
-	} else if (extension == ".frag") {
+	}
+	else if (extension == ".frag")
+	{
 		ShaderType = GL_FRAGMENT_SHADER;
-	} else if (extension == ".comp") {
+	}
+	else if (extension == ".comp")
+	{
 		ShaderType = GL_COMPUTE_SHADER;
-	} else {
+	}
+	else
+	{
 		std::cerr << "ERROR: Unrecognized shader extension." << std::endl;
 		return (GLuint)0;
 	}
@@ -62,11 +77,13 @@ GLuint LSShaderUtilities::LoadShader(const std::string &FilePath) {
 
 	GLint SuccessfulCompilation;
 	glGetObjectParameterivARB(ShaderID, GL_COMPILE_STATUS, &SuccessfulCompilation);
-	if (!SuccessfulCompilation) {
+	if (!SuccessfulCompilation)
+	{
 		GLint LogLength,
-				dummy;
+			dummy;
 		glGetShaderiv(ShaderID, GL_INFO_LOG_LENGTH, &LogLength);
-		if (LogLength > 1) {
+		if (LogLength > 1)
+		{
 			GLchar *InfoLog = new GLchar[LogLength];
 			glGetShaderInfoLog(ShaderID, LogLength, &dummy, InfoLog);
 			std::cerr << InfoLog << std::endl;
@@ -78,21 +95,24 @@ GLuint LSShaderUtilities::LoadShader(const std::string &FilePath) {
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GLuint LSShaderUtilities::LinkProgram(std::vector<GLuint> ShaderIDs) {
+GLuint LSShaderUtilities::LinkProgram(std::vector<GLuint> ShaderIDs)
+{
 	GLuint ProgramID = glCreateProgram();
 	std::for_each(
-			ShaderIDs.begin(),
-			ShaderIDs.end(),
-			[&](const GLuint &ShaderID) { glAttachShader(ProgramID, ShaderID); });
+		ShaderIDs.begin(),
+		ShaderIDs.end(),
+		[&](const GLuint &ShaderID) { glAttachShader(ProgramID, ShaderID); });
 	glLinkProgram(ProgramID);
 
 	GLint LinkerStatus;
 	glGetObjectParameterivARB(ProgramID, GL_LINK_STATUS, &LinkerStatus);
-	if (!LinkerStatus) {
+	if (!LinkerStatus)
+	{
 		GLint LogLength,
-				dummy;
+			dummy;
 		glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &LogLength);
-		if (LogLength > 1) {
+		if (LogLength > 1)
+		{
 			GLchar *InfoLog = new GLchar[LogLength];
 			glGetProgramInfoLog(ProgramID, LogLength, &dummy, InfoLog);
 			std::cerr << InfoLog << std::endl;

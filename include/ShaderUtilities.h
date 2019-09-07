@@ -22,7 +22,8 @@
 /**
  * Contains a set of functions that are helpfule for loading compiling and linking shaders.
  */
-namespace LSShaderUtilities {
+namespace LSShaderUtilities
+{
 /**
    * Loads contents of a file into a string
    *
