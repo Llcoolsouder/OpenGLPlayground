@@ -8,10 +8,8 @@
  */
 #pragma once
 
-class SceneNode
-{
+class SceneNode {
 public:
-
 	/**
 	 * Should handle all updates of the node
 	 * from one frame to the next

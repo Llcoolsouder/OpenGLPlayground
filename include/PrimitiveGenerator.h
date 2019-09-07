@@ -16,7 +16,6 @@
  * Contains a set of functions used to generate vertex arrays
  * for various simple geometric shapes
  */
-namespace LSPrimitiveGenerator
-{
+namespace LSPrimitiveGenerator {
 
 }
