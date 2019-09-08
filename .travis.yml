@@ -27,4 +27,8 @@ script:
 jobs:
   include:
     - stage: deploy_docs
-      script: "./ci/deploy_docs.sh"
+      script: 
+        - git checkout master
+        - ./ci/build_docs.sh
+        - ./ci/generate_todo_list.sh
+        - ./ci/commit_changes.sh

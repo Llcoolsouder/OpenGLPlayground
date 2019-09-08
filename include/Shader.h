@@ -11,36 +11,35 @@
 
 #include <GL/glew.h>
 
-#include <vector>
-#include <string>
 #include <map>
+#include <string>
+#include <vector>
 
 class Shader
 {
 public:
+	Shader() = delete;
+	Shader(const Shader &other) = delete;
 
-  Shader() = delete;
-  Shader(const Shader& rhs) = delete;
-
-  /**
+	/**
    * Loads, compiles, and links a shader program
    * from the files given by Filenames
    *
    * @param Filenames Paths to GLSL shader files
    */
-  Shader(const std::vector<std::string>& Filenames);
+	Shader(const std::vector<std::string> &Filenames);
 
-  /**
+	/**
    * Deletes the program
    */
-  ~Shader();
+	~Shader();
 
-  /**
+	/**
    * Binds shader program to context
    */
-  void Use();
+	void Use();
 
-  /**
+	/**
    * Sets a uniform to a given value
    *
    * @param name Name of the uniform from shader source
@@ -48,52 +47,51 @@ public:
    *
    * @return true if successful, else false
    */
-  bool SetUniform(const std::string& name, const void* data);
+	bool SetUniform(const std::string &name, const void *data);
 
-  /**
+	/**
    * Sets all vertex attribute pointers to their places
-   * in the currently bound vertex buffer.
+   * in the currently bound vertex buffer. This assumes that 
+   * the currently bound buffer is an interleaved buffer
+   * containing ALL of the attributes specified in this shader.
    * NOTE: This MUST be called after a new buffer is bound.
    */
-  void SetAllVertexAttribPointers();
+	void SetAllVertexAttribPointers();
 
 private:
+	struct ShaderParameter
+	{
+		char Name[16]; /// Data name from shader source
+		int TYPE; /// Data type
+		unsigned int NumItems; /// How many datum make up this object
+		GLint Location; /// Location in shader program
+		int Offset; /// Offset in interleaved vertex buffer
+	};
 
-  struct ShaderParameter
-  {
-    char Name[16];  /// Data name from shader source
-    int TYPE; /// Data type
-    unsigned int NumItems;  /// How many datum make up this object
-    GLint Location;  /// Location in shader program
-    int Offset; /// Offset in interleaved vertex buffer
-  };
+	void SetVertexAttribPointer(const std::pair<std::string, ShaderParameter> Attrib);
 
-  void SetVertexAttribPointer(const std::pair<std::string, ShaderParameter> Attrib);
-
-  int GetSizeofGLType(int type);
+	int GetSizeofGLType(int type);
 
 private:
-  GLuint mProgramID;
-  std::map<std::string, ShaderParameter> mVertexAttribs;
-  std::map<std::string, ShaderParameter> mUniforms;
-  int mVertexSize;
+	GLuint mProgramID;
+	std::map<std::string, ShaderParameter> mVertexAttribs;
+	std::map<std::string, ShaderParameter> mUniforms;
+	int mVertexSize;
 
-  /// Defines supported vertex attribute names
-  constexpr static ShaderParameter SupportedVertexAttribs[] = 
-  {
-    {"aPosition", GL_FLOAT, 3, NULL, NULL},
-    {"aColor",    GL_FLOAT, 4, NULL, NULL},
-  };
+	/// Defines supported vertex attribute names
+	constexpr static ShaderParameter SupportedVertexAttribs[] = {
+		{ "aPosition", GL_FLOAT, 3, NULL, NULL },
+		{ "aColor", GL_FLOAT, 4, NULL, NULL },
+	};
 
-  /// Defines supported shader uniforms
-  constexpr static ShaderParameter SupportedUniforms[] =
-  {
-    {"uvModelMatrix", GL_FLOAT, 16, NULL, 0},
-    {"uvViewMatrix",  GL_FLOAT, 16, NULL, 0},
-    {"uvProjMatrix",  GL_FLOAT, 16, NULL, 0},
-    {"uColor",        GL_FLOAT, 4,  NULL, 0},
-    {"ugModelMatrix", GL_FLOAT, 16, NULL, 0},
-    {"ugViewMatrix",  GL_FLOAT, 16, NULL, 0},
-    {"ugProjMatrix",  GL_FLOAT, 16, NULL, 0},
-  };
+	/// Defines supported shader uniforms
+	constexpr static ShaderParameter SupportedUniforms[] = {
+		{ "uvModelMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "uvViewMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "uvProjMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "uColor", GL_FLOAT, 4, NULL, 0 },
+		{ "ugModelMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "ugViewMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "ugProjMatrix", GL_FLOAT, 16, NULL, 0 },
+	};
 };
