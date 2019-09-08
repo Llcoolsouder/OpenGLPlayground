@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OpenGL Playground: Class Members</title>
+<title>OpenGL Playground: SceneGraph Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -42,7 +42,6 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -57,61 +56,38 @@ $(function() {
 </iframe>
 </div>
 
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_scene_graph-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">SceneGraph Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div><ul>
-<li>Bind()
-: <a class="el" href="class_mesh.html#a8f574e21179fd5887544a90631d392b7">Mesh</a>
-</li>
-<li>Camera()
-: <a class="el" href="class_camera.html#aabf058eb164d6936a18ec4e9f550cb71">Camera</a>
-</li>
-<li>Draw()
-: <a class="el" href="class_mesh.html#abf84fe4ef735490769268685087e0e32">Mesh</a>
-, <a class="el" href="class_model.html#a45d8e86f2fbba2f62e998903151a4d1d">Model</a>
-, <a class="el" href="class_scene_graph.html#a4db452d7444ee121c4d2ff74fdd73eda">SceneGraph</a>
-, <a class="el" href="class_scene_node.html#a829d57870b92c9bef4eadf1d4ad8edb5">SceneNode</a>
-</li>
-<li>GetProjMatrix()
-: <a class="el" href="class_camera.html#aba19124d9654376b35ab86a3332b1cda">Camera</a>
-</li>
-<li>GetViewMatrix()
-: <a class="el" href="class_camera.html#a3be52b99b0e17dc4c79164bc4400f54e">Camera</a>
-</li>
-<li>Mesh()
-: <a class="el" href="class_mesh.html#a7bc4998490e6eaa7ff7f1030b3dfe267">Mesh</a>
-</li>
-<li>Model()
-: <a class="el" href="class_model.html#a48858e5f328ba822b430d86a76a6ceeb">Model</a>
-</li>
-<li>SetAllVertexAttribPointers()
-: <a class="el" href="class_shader.html#a280d741ee274c9e5f82206ec07ae7854">Shader</a>
-</li>
-<li>SetUniform()
-: <a class="el" href="class_shader.html#ae3ae482c24e57e6b8c684587e0465b98">Shader</a>
-</li>
-<li>Shader()
-: <a class="el" href="class_shader.html#a7dadc48fdca540bda99440c3215d7348">Shader</a>
-</li>
-<li>UniformData
-: <a class="el" href="class_model.html#af869f90e8af823ab0608aeaff89f8a16">Model</a>
-</li>
-<li>Update()
-: <a class="el" href="class_model.html#aa83183aaf1b9ef29bf554a2ce10b40eb">Model</a>
-, <a class="el" href="class_scene_graph.html#aa6520073808753daed5196f1bc53c1a7">SceneGraph</a>
-, <a class="el" href="class_scene_node.html#afbbfdbddf53a8a0d98b8f899e213c1cf">SceneNode</a>
-</li>
-<li>Use()
-: <a class="el" href="class_shader.html#a6b11327cff651ffdb22988b6917b1650">Shader</a>
-</li>
-<li>~Mesh()
-: <a class="el" href="class_mesh.html#a5efe4da1a4c0971cfb037bd70304c303">Mesh</a>
-</li>
-<li>~Model()
-: <a class="el" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model</a>
-</li>
-<li>~Shader()
-: <a class="el" href="class_shader.html#aff01df87e8a102f270b5b135a295e59d">Shader</a>
-</li>
+<div class="dynheader">
+Inheritance diagram for SceneGraph:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_scene_graph.png" usemap="#SceneGraph_map" alt=""/>
+  <map id="SceneGraph_map" name="SceneGraph_map">
+<area href="class_scene_node.html" alt="SceneNode" shape="rect" coords="0,0,83,24"/>
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa6520073808753daed5196f1bc53c1a7"><td class="memItemLeft" align="right" valign="top"><a id="aa6520073808753daed5196f1bc53c1a7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_graph.html#aa6520073808753daed5196f1bc53c1a7">Update</a> ()=0</td></tr>
+<tr class="memdesc:aa6520073808753daed5196f1bc53c1a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should handle all updates of the node from one frame to the next. <br /></td></tr>
+<tr class="separator:aa6520073808753daed5196f1bc53c1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db452d7444ee121c4d2ff74fdd73eda"><td class="memItemLeft" align="right" valign="top"><a id="a4db452d7444ee121c4d2ff74fdd73eda"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_graph.html#a4db452d7444ee121c4d2ff74fdd73eda">Draw</a> ()=0</td></tr>
+<tr class="memdesc:a4db452d7444ee121c4d2ff74fdd73eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should handle how the node is drawn. <br /></td></tr>
+<tr class="separator:a4db452d7444ee121c4d2ff74fdd73eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>include/<a class="el" href="_scene_graph_8h_source.html">SceneGraph.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
