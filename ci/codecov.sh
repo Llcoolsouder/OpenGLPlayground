@@ -4,7 +4,7 @@
 git clone https://github.com/linux-test-project/lcov.git
 cd lcov
 git checkout v1.14
-make install
+sudo make install
 cd ..
 
 # Generate report
