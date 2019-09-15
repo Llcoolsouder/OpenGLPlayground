@@ -31,3 +31,5 @@ jobs:
     - "./ci/build_docs.sh"
     - "./ci/generate_todo_list.sh"
     - "./ci/commit_changes.sh"
+  - stage: CodeCoverage
+    script: ./ci/codecov.sh
