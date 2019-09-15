@@ -9,26 +9,25 @@ env:
   global:
   - GH_REF="github.com/Llcoolsouder/OpenGLPlayground.git"
   - secure: BueXk+xUain4zOqmM5Ty0fug3ANztcS7qMUMN/QBSSCKTQFy7D2N2m1YUFBJjGdhzidbuUfANGMfxskSOcYNC495RlgWwdoKjBaJ1eNt52WCrG//sG3YeJ13jiNI8gsOoVIGJAFgmN2J1Ym5jCw8pMcHcEWvUmoWzj4f84UTR7OdblehqllzJBbEHiNH7EaUvVt9D8yl96CGS3sIKrLwUsi8HibAFOjbNzmLXb7OniNFmTKTCAAHe8myARBDMHt7qMnvWAAa8Cb1BkqS5TVAC4k562yuefMhlvjiMGr1cX+cM/D2lhOdWHju69lHM1txM8iFnplUTqxycbZgHOJwGl31hu280BZ/enow8rqq6svHTuiT685jW71yyKPTXmTez6Ew3Vi2NLVhSCI+Idbml/VhYSnT4qFYOzR2lgUtaj+zfoSBcPvpVnW8UHa2QbZz5zAiQU9suJeV9I1z0UZlChn+LWVe4u9CxFMZOaIaSl9N09WjL54qjr+cfAqCDE5uVdmFc8v370/FUsRrEYHFpUkoMaQ3QDObN+3xV0Zi+L8nEqc/z7BvxgRqWbEOLBtG7m5BEOg1iwC0cYuxGdd3z6Bw+/VHEBozEbOfWagRlwJtn8BNo4L5BdrWWETdUdbXZocNSBSpqqU6otRucymgcqM6EZUjQ2ndl5k3nvwxxjg=
-
+  - secure: R+yjBcCkbqjHmKZhRmFWoDqvE08WYdEQiySh16Q/99LNEuk/5ikKyEAVIsi2dwd+/OLiJdIvsP+9HhDlWoWmDPPqWUmhDpHowyGD3PpQM/DV/V86yW0l8W379gsK0ft3YMTXmk+j6bhl6TWf6mEBbWkcOPNQDeXEDKdaVS2zN1GKqoKINDlDv7hABYWe0yMd6+lhu+PNcZanTQkIKkzghdLralXHWPLI9p1gt74gBv06+FfoIjdQRu/0ReIJJxjugbng1QH4d74SGAF97LeNz6WEvZdSQdRmwekqI/wS1xw9wKX1+d2LtXssYPEqrXODSeuLyraUjM0RPXTTm/1PbrEBmTdynXFSPV2Q2GSYmDYKoPvtMQGbLgTBoZPXrGUbbk9n5BoBT6MbEmY7inRyOcxZL1KrihLp0wYEr3xEC6RMUsN2+7bAitDY3Jw9Wsy1gtX+AnwqxERgs532JU8f8ZWyE9PB+W7vI53MRGuUTWlREnmgYByJ2JkncptGtKuLAF96PF2md5WUTZSHgTUJvt1xkPmFlvNx0qHeiLqf3GyX3LbPiH/6kQcOBpVKg9EhZBsAxGBTxrADJTZrhdbdVSXYMyrxGI58tlAxsoGjrLxF5UYxsP9ZNgIcTQmT5/HTqgGDVgnRLn9lsYIpNFOJq2kOKVpuY8wHoVr+YXVZ678=
 compiler:
-  - gcc
-  - clang
+- gcc
+- clang
 install:
-  - sudo apt-get install -y libglew-dev
-  - sudo apt-get install -y libglm-dev
-  - sudo apt-get install -y libglfw3-dev
-  - sudo apt-get install -y doxygen
+- sudo apt-get install -y libglew-dev
+- sudo apt-get install -y libglm-dev
+- sudo apt-get install -y libglfw3-dev
+- sudo apt-get install -y doxygen
 script:
-  - mkdir build && cd build
-  - cmake ..
-  - make .
-  - cd ..
-
+- mkdir build && cd build
+- cmake ..
+- make .
+- cd ..
 jobs:
   include:
-    - stage: deploy_docs
-      script: 
-        - git checkout master
-        - ./ci/build_docs.sh
-        - ./ci/generate_todo_list.sh
-        - ./ci/commit_changes.sh
+  - stage: deploy_docs
+    script:
+    - git checkout master
+    - "./ci/build_docs.sh"
+    - "./ci/generate_todo_list.sh"
+    - "./ci/commit_changes.sh"
