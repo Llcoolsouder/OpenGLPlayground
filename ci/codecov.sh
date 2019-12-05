@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install lcov
 git clone https://github.com/linux-test-project/lcov.git
