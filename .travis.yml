@@ -24,7 +24,7 @@ addons:
 script:
 - mkdir build && cd build
 - cmake -DCODE_COVERAGE=ON ..
-- make .
+- cmake --build .
 - ctest
 - ./ci/codecov.sh
 - cd ..
