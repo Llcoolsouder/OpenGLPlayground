@@ -20,7 +20,7 @@ install:
 - sudo apt-get install -y doxygen
 script:
 - mkdir build && cd build
-- cmake -D CODE_COVERAGE ..
+- cmake -DCODE_COVERAGE=ON ..
 - make .
 - cd ..
 - ./ci/codecov.sh
