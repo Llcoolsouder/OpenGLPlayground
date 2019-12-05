@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Install lcov
-git clone https://github.com/linux-test-project/lcov.git
-cd lcov
-git checkout v1.14
-sudo make install
-cd ..
-
 # Generate report
 lcov --directory . --capture --output-file coverage.info
 lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info
