@@ -13,11 +13,14 @@ env:
 compiler:
 - gcc
 - clang
-install:
-- sudo apt-get install -y libglew-dev
-- sudo apt-get install -y libglm-dev
-- sudo apt-get install -y libglfw3-dev
-- sudo apt-get install -y doxygen
+addons:
+  apt:
+    packages:
+    - libglew-dev
+    - libglm-dev
+    - libglfw3-dev
+    - doxygen
+    - lcov
 script:
 - mkdir build && cd build
 - cmake -DCODE_COVERAGE=ON ..
