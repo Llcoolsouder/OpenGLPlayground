@@ -25,8 +25,8 @@ script:
 - mkdir build && cd build
 - cmake -DCODE_COVERAGE=ON ..
 - make .
-- cd ..
 - ./ci/codecov.sh
+- cd ..
 jobs:
   include:
   - stage: deploy_docs
