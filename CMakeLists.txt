@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 set (CMAKE_CXX_STANDARD 11)
 project(OpenGLPlayground)
 
+add_definitions(-DGLM_ENABLE_EXPERIMENTAL)
+
 # Code Coverage Configuration
 add_library(coverage_config INTERFACE)
 
