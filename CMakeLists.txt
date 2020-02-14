@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 set (CMAKE_CXX_STANDARD 11)
-project(OpenGLPlayground)
-
-add_definitions(-DGLM_ENABLE_EXPERIMENTAL)
+project(PlaygroundEngine)
 
 # Code Coverage Configuration
 add_library(coverage_config INTERFACE)
@@ -22,6 +20,7 @@ if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
   endif()
 endif(CODE_COVERAGE)
 
+# Build engine library
 # Add files
 file(GLOB
 	SOURCE_FILES
@@ -30,11 +29,13 @@ file(GLOB_RECURSE
 	HEADER_FILES
 	${CMAKE_SOURCE_DIR}/include/*.h)
 
-# Create executable
-add_executable(
+# Create library
+add_library(
 	${PROJECT_NAME}
 	${HEADER_FILES}
 	${SOURCE_FILES})
+
+add_definitions(-DGLM_ENABLE_EXPERIMENTAL)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   # using Clang
@@ -48,7 +49,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	PROPERTIES
 	LINK_FLAGS
 	/SUBSYSTEM:CONSOLE)
-	
+
 	# Add project filters
 	source_group(
 		"Source"
@@ -70,13 +71,13 @@ endif()
 set(CMAKE_MODULE_PATH
 	${CMAKE_MODULE_PATH}
 	"${CMAKE_SOURCE_DIR}/cmake/")
-	
+
 find_package(OpenGL REQUIRED OpenGL)
 
 find_package(GLM REQUIRED)
 message(STATUS
 	"GLM included at ${GLM_INCLUDE_DIR}")
-	
+
 find_package(GLFW3 REQUIRED)
 message(STATUS
 	"GLFW3 included at ${GLFW3_INCLUDE_DIR}")
@@ -90,7 +91,8 @@ message(STATUS
 set(LIBS
 	OpenGL::GL
 	${GLFW3_LIBRARY}
-	GLEW::GLEW)
+	GLEW::GLEW
+  coverage_config)
 target_link_libraries(
 	${PROJECT_NAME}
 	${LIBS})
@@ -107,7 +109,7 @@ target_include_directories(
 	"${CMAKE_SOURCE_DIR}/include"
 	${ADDITIONAL_INCLUDES})
 
-# Add testing	
+# Add testing
 option (BUILD_TESTING "Build the testing tree." ON)
 # Only build tests if we are the top-level project
 # Allows this to be used by super projects with `add_subdirectory`
@@ -115,5 +117,3 @@ if (BUILD_TESTING AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
   enable_testing()
   add_subdirectory(tests)
 endif()
-	
-	
