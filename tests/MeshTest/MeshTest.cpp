@@ -14,7 +14,6 @@ int main()
 		if (!glfwInit())
 		{
 			std::cerr << "Failed to initialize GLFW library" << std::endl;
-			glfwTerminate();
 			return 1;
 		}
 

@@ -8,6 +8,9 @@
  */
 #pragma once
 
+#include <list>
+#include <memory>
+
 class SceneNode
 {
 public:
@@ -20,5 +23,11 @@ public:
 	/**
 	 * Should handle how the node is drawn
 	 */
-	virtual void Draw() = 0;
+	virtual void Draw() const = 0;
+
+protected:
+
+	std::shared_ptr<SceneNode> mpParent;
+	std::list<std::shared_ptr<SceneNode>> mChildren;
+
 };

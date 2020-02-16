@@ -8,12 +8,13 @@
  * TODO: Add textures to Model (maybe encapsulate textures and Shader under Material)
  */
 
+#include "SceneNode.h"
 #include "Mesh.h"
 #include "Shader.h"
 
 #include <memory>
 
-class Model
+class Model : public SceneNode
 {
 public:
 	/// Shorthand for uniform data needed by Model
@@ -41,15 +42,15 @@ public:
 	/**
    * Sets all of the necessary uniforms
    */
-	void Update();
+	virtual void Update() override;
 
 	/**
    * Draws mpMesh using mpShader
    */
-	void Draw() const;
+	virtual void Draw() const override;
 
 private:
-private:
+
 	const std::shared_ptr<Mesh> mpMesh;
 	const std::shared_ptr<Shader> mpShader;
 	const std::vector<UniformData> mUniforms;

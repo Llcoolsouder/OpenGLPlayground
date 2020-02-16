@@ -45,6 +45,11 @@ void Model::Update()
 		mUniforms.begin(),
 		mUniforms.end(),
 		[&](const UniformData uniform) { mpShader->SetUniform(uniform.first, uniform.second.get()); });
+
+	for_each(
+		mChildren.begin(),
+		mChildren.end(),
+		[&](std::shared_ptr<SceneNode> child) { child->Update(); });
 }
 
 //-----------------------------------------------------------------------------
@@ -55,4 +60,9 @@ void Model::Draw() const
 	mpShader->SetAllVertexAttribPointers();
 	mpShader->Use();
 	mpMesh->Draw();
+
+	for_each(
+		mChildren.begin(),
+		mChildren.end(),
+		[&](std::shared_ptr<SceneNode> child) { child->Draw(); });
 }
