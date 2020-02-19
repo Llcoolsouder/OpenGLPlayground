@@ -10,10 +10,21 @@
 
 
 ## Description <a name="description"></a>
-This is just a mess of code created in my OpenGL studies.  
+This started as a mess of code created in my OpenGL studies. However, it has now grown into the start of a very basic rendering engine.
+The engine contains code for:
+- `Shader` loading and compilation
+- `Mesh` loading and drawing
+- A `Model` class which abstracts away some of the details of the `Shader` and `Mesh` objects (Eventually, class will have the `Shader` replaced with a `Material` class)
+- `SceneNode` which can be used to build a Scene Graph  
+
 All of the code is documented at <https://llcoolsouder.github.io/OpenGLPlayground/index.html>;
 not because I think anyone will find it particularly useful, but because it's
 good practice.
+
+Eventually, I would like to turn this into a *game* engine by adding:
+- user input
+- a physics engine
+- whatever other fun features I decide I want to learn about
 
 ## Dependencies <a name="dependencies"></a>
 - OpenGL 4.3 (for computer shaders)
