@@ -108,6 +108,8 @@ target_include_directories(
 	"${CMAKE_SOURCE_DIR}/src"
 	"${CMAKE_SOURCE_DIR}/include"
 	${ADDITIONAL_INCLUDES})
+	
+add_subdirectory(apps)
 
 # Add testing
 option (BUILD_TESTING "Build the testing tree." ON)

@@ -1,5 +1,5 @@
 /**
- * @file OpenGLPlayground.cpp
+ * @file Sandbox.cpp
  * @mainpage OpenGL Playground
  *
  * @section Summary
