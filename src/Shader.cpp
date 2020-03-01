@@ -47,7 +47,7 @@ Shader::Shader(const std::vector<std::string> &Filenames)
 	}
 
 	// Get all uniforms
-	int NumSupUniforms = sizeof(SupportedUniforms) / sizeof(SupportedUniforms[0]);
+	constexpr int NumSupUniforms = sizeof(SupportedUniforms) / sizeof(SupportedUniforms[0]);
 	for (int i = 0; i < NumSupUniforms; i++)
 	{
 		ShaderParameter uniform(SupportedUniforms[i]);

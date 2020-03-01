@@ -126,7 +126,7 @@ int main()
 	std::shared_ptr<Mesh> pTriangleMesh = std::make_shared<Mesh>(vertices, indices);
 
 	// Create shader program
-	const std::string ShaderFolder = "../shaders/";
+	const std::string ShaderFolder = "../../../shaders/";
 	std::vector<std::string> ShaderFiles;
 	ShaderFiles.push_back(ShaderFolder + "solid.vert");
 	ShaderFiles.push_back(ShaderFolder + "solid.frag");
