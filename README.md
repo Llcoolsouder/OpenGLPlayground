@@ -27,7 +27,7 @@ Eventually, I would like to turn this into a *game* engine by adding:
 - whatever other fun features I decide I want to learn about
 
 ## Dependencies <a name="dependencies"></a>
-- OpenGL 4.3 (for computer shaders)
+- OpenGL 4.3 (for compute shaders)
 - GLEW
 - GLFW3
 - GLM
