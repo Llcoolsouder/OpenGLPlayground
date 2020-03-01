@@ -17,7 +17,7 @@ The engine contains code for:
 - A `Model` class which abstracts away some of the details of the `Shader` and `Mesh` objects (Eventually, class will have the `Shader` replaced with a `Material` class)
 - `SceneNode` which can be used to build a Scene Graph  
 
-All of the code is documented at <https://llcoolsouder.github.io/OpenGLPlayground/index.html>;
+All of the code is documented at <https://llcoolsouder.github.io/PlaygroundEngine/index.html>;
 not because I think anyone will find it particularly useful, but because it's
 good practice.
 
