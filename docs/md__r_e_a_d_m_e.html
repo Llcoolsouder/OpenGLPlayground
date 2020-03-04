@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OpenGL Playground: OpenGL Playground [![Build Status](https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master)](https://travis-ci.org/Llcoolsouder/OpenGLPlayground) [![codecov](https://codecov.io/gh/Llcoolsouder/OpenGLPlayground/branch/master/graph/badge.svg)](https://codecov.io/gh/Llcoolsouder/OpenGLPlayground)</title>
+<title>Playground Engine: OpenGL Playground Engine [![Build Status](https://travis-ci.org/Llcoolsouder/PlaygroundEngine.svg?branch=master)](https://travis-ci.org/Llcoolsouder/PlaygroundEngine) [![codecov](https://codecov.io/gh/Llcoolsouder/PlaygroundEngine/branch/master/graph/badge.svg)](https://codecov.io/gh/Llcoolsouder/PlaygroundEngine)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">OpenGL Playground
+   <div id="projectname">Playground Engine
    </div>
   </td>
  </tr>
@@ -59,7 +59,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">OpenGL Playground [![Build Status](<a href="https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master">https://travis-ci.org/Llcoolsouder/OpenGLPlayground.svg?branch=master</a>)](<a href="https://travis-ci.org/Llcoolsouder/OpenGLPlayground">https://travis-ci.org/Llcoolsouder/OpenGLPlayground</a>) [![codecov](<a href="https://codecov.io/gh/Llcoolsouder/OpenGLPlayground/branch/master/graph/badge.svg">https://codecov.io/gh/Llcoolsouder/OpenGLPlayground/branch/master/graph/badge.svg</a>)](<a href="https://codecov.io/gh/Llcoolsouder/OpenGLPlayground">https://codecov.io/gh/Llcoolsouder/OpenGLPlayground</a>) </div>  </div>
+<div class="title">OpenGL Playground Engine [![Build Status](<a href="https://travis-ci.org/Llcoolsouder/PlaygroundEngine.svg?branch=master">https://travis-ci.org/Llcoolsouder/PlaygroundEngine.svg?branch=master</a>)](<a href="https://travis-ci.org/Llcoolsouder/PlaygroundEngine">https://travis-ci.org/Llcoolsouder/PlaygroundEngine</a>) [![codecov](<a href="https://codecov.io/gh/Llcoolsouder/PlaygroundEngine/branch/master/graph/badge.svg">https://codecov.io/gh/Llcoolsouder/PlaygroundEngine/branch/master/graph/badge.svg</a>)](<a href="https://codecov.io/gh/Llcoolsouder/PlaygroundEngine">https://codecov.io/gh/Llcoolsouder/PlaygroundEngine</a>) </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1>Table of Contents</h1>
@@ -74,10 +74,21 @@ $(function() {
 <li><a href="#examples">Examples (you should just skip to this)</a></li>
 </ol>
 <h2>Description <a class="anchor" id="description"></a></h2>
-<p>This is just a mess of code created in my OpenGL studies. All of the code is documented at <a href="https://llcoolsouder.github.io/OpenGLPlayground/index.html">https://llcoolsouder.github.io/OpenGLPlayground/index.html</a>; not because I think anyone will find it particularly useful, but because it's good practice.</p>
+<p>This started as a mess of code created in my OpenGL studies. However, it has now grown into the start of a very basic rendering engine. The engine contains code for:</p><ul>
+<li><code><a class="el" href="class_shader.html">Shader</a></code> loading and compilation</li>
+<li><code><a class="el" href="class_mesh.html" title="As of 08/29/19, Mesh ONLY supports interleaved arrays because Shader only supports interleaved arrays...">Mesh</a></code> loading and drawing</li>
+<li>A <code><a class="el" href="class_model.html">Model</a></code> class which abstracts away some of the details of the <code><a class="el" href="class_shader.html">Shader</a></code> and <code><a class="el" href="class_mesh.html" title="As of 08/29/19, Mesh ONLY supports interleaved arrays because Shader only supports interleaved arrays...">Mesh</a></code> objects (Eventually, class will have the <code><a class="el" href="class_shader.html">Shader</a></code> replaced with a <code>Material</code> class)</li>
+<li><code><a class="el" href="class_scene_node.html">SceneNode</a></code> which can be used to build a Scene Graph</li>
+</ul>
+<p>All of the code is documented at <a href="https://llcoolsouder.github.io/PlaygroundEngine/index.html">https://llcoolsouder.github.io/PlaygroundEngine/index.html</a>; not because I think anyone will find it particularly useful, but because it's good practice.</p>
+<p>Eventually, I would like to turn this into a <em>game</em> engine by adding:</p><ul>
+<li>user input</li>
+<li>a physics engine</li>
+<li>whatever other fun features I decide I want to learn about</li>
+</ul>
 <h2>Dependencies <a class="anchor" id="dependencies"></a></h2>
 <ul>
-<li>OpenGL 4.3 (for computer shaders)</li>
+<li>OpenGL 4.3 (for compute shaders)</li>
 <li>GLEW</li>
 <li>GLFW3</li>
 <li>GLM</li>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OpenGL Playground: Member List</title>
+<title>Playground Engine: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">OpenGL Playground
+   <div id="projectname">Playground Engine
    </div>
   </td>
  </tr>
@@ -65,8 +65,16 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_scene_graph.html">SceneGraph</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_scene_graph.html#a4db452d7444ee121c4d2ff74fdd73eda">Draw</a>()=0</td><td class="entry"><a class="el" href="class_scene_graph.html">SceneGraph</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_scene_graph.html#aa6520073808753daed5196f1bc53c1a7">Update</a>()=0</td><td class="entry"><a class="el" href="class_scene_graph.html">SceneGraph</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scene_node.html#a62122b6484b1b1b81410e954e5f39a82">AddChildNode</a>(std::shared_ptr&lt; SceneNode &gt; pNewChildNode)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>Draw</b>()=0 (defined in <a class="el" href="class_scene_graph.html">SceneGraph</a>)</td><td class="entry"><a class="el" href="class_scene_graph.html">SceneGraph</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scene_node.html#af4fc014b1d1ecf1dc561bd252854f6ba">SceneNode::Draw</a>() const</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>mChildren</b> (defined in <a class="el" href="class_scene_node.html">SceneNode</a>)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>mpParent</b> (defined in <a class="el" href="class_scene_node.html">SceneNode</a>)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_scene_node.html#a17bbbf26eeab3485bc3636abe3e576a1">RemoveChildNode</a>(std::shared_ptr&lt; SceneNode &gt; pChildNode)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>SceneNode</b>() (defined in <a class="el" href="class_scene_node.html">SceneNode</a>)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_scene_node.html#ae4e178792bcd5dfa05df7068f08e88d1">SetParentNode</a>(std::shared_ptr&lt; SceneNode &gt; pNewParentNode)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_scene_graph.html#aa6520073808753daed5196f1bc53c1a7">Update</a>()=0</td><td class="entry"><a class="el" href="class_scene_graph.html">SceneGraph</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~SceneNode</b>() (defined in <a class="el" href="class_scene_node.html">SceneNode</a>)</td><td class="entry"><a class="el" href="class_scene_node.html">SceneNode</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

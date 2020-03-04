@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>OpenGL Playground: SceneNode Class Reference</title>
+<title>Playground Engine: SceneNode Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">OpenGL Playground
+   <div id="projectname">Playground Engine
    </div>
   </td>
  </tr>
@@ -60,9 +60,10 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_scene_node-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">SceneNode Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">SceneNode Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
@@ -71,23 +72,148 @@ Inheritance diagram for SceneNode:</div>
  <div class="center">
   <img src="class_scene_node.png" usemap="#SceneNode_map" alt=""/>
   <map id="SceneNode_map" name="SceneNode_map">
-<area href="class_scene_graph.html" alt="SceneGraph" shape="rect" coords="0,56,83,80"/>
+<area href="class_model.html" alt="Model" shape="rect" coords="0,56,83,80"/>
+<area href="class_scene_graph.html" alt="SceneGraph" shape="rect" coords="93,56,176,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afbbfdbddf53a8a0d98b8f899e213c1cf"><td class="memItemLeft" align="right" valign="top"><a id="afbbfdbddf53a8a0d98b8f899e213c1cf"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#afbbfdbddf53a8a0d98b8f899e213c1cf">Update</a> ()=0</td></tr>
-<tr class="memdesc:afbbfdbddf53a8a0d98b8f899e213c1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should handle all updates of the node from one frame to the next. <br /></td></tr>
-<tr class="separator:afbbfdbddf53a8a0d98b8f899e213c1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a829d57870b92c9bef4eadf1d4ad8edb5"><td class="memItemLeft" align="right" valign="top"><a id="a829d57870b92c9bef4eadf1d4ad8edb5"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a829d57870b92c9bef4eadf1d4ad8edb5">Draw</a> ()=0</td></tr>
-<tr class="memdesc:a829d57870b92c9bef4eadf1d4ad8edb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should handle how the node is drawn. <br /></td></tr>
-<tr class="separator:a829d57870b92c9bef4eadf1d4ad8edb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac827ea79021f26ccaf8aa43cb1c1f165"><td class="memItemLeft" align="right" valign="top"><a id="ac827ea79021f26ccaf8aa43cb1c1f165"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#ac827ea79021f26ccaf8aa43cb1c1f165">Update</a> ()</td></tr>
+<tr class="memdesc:ac827ea79021f26ccaf8aa43cb1c1f165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should handle all updates of the node from one frame to the next. <br /></td></tr>
+<tr class="separator:ac827ea79021f26ccaf8aa43cb1c1f165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4fc014b1d1ecf1dc561bd252854f6ba"><td class="memItemLeft" align="right" valign="top"><a id="af4fc014b1d1ecf1dc561bd252854f6ba"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#af4fc014b1d1ecf1dc561bd252854f6ba">Draw</a> () const</td></tr>
+<tr class="memdesc:af4fc014b1d1ecf1dc561bd252854f6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should handle how the node is drawn. <br /></td></tr>
+<tr class="separator:af4fc014b1d1ecf1dc561bd252854f6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4e178792bcd5dfa05df7068f08e88d1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#ae4e178792bcd5dfa05df7068f08e88d1">SetParentNode</a> (std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt; pNewParentNode)</td></tr>
+<tr class="memdesc:ae4e178792bcd5dfa05df7068f08e88d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pointer to the parent node.  <a href="#ae4e178792bcd5dfa05df7068f08e88d1">More...</a><br /></td></tr>
+<tr class="separator:ae4e178792bcd5dfa05df7068f08e88d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62122b6484b1b1b81410e954e5f39a82"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a62122b6484b1b1b81410e954e5f39a82">AddChildNode</a> (std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt; pNewChildNode)</td></tr>
+<tr class="memdesc:a62122b6484b1b1b81410e954e5f39a82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a child node to this node.  <a href="#a62122b6484b1b1b81410e954e5f39a82">More...</a><br /></td></tr>
+<tr class="separator:a62122b6484b1b1b81410e954e5f39a82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17bbbf26eeab3485bc3636abe3e576a1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a17bbbf26eeab3485bc3636abe3e576a1">RemoveChildNode</a> (std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt; pChildNode)</td></tr>
+<tr class="memdesc:a17bbbf26eeab3485bc3636abe3e576a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a child node from this node.  <a href="#a17bbbf26eeab3485bc3636abe3e576a1">More...</a><br /></td></tr>
+<tr class="separator:a17bbbf26eeab3485bc3636abe3e576a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a03a178da3d573bd49a48ba304cc6db7b"><td class="memItemLeft" align="right" valign="top"><a id="a03a178da3d573bd49a48ba304cc6db7b"></a>
+std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mpParent</b></td></tr>
+<tr class="separator:a03a178da3d573bd49a48ba304cc6db7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3839ad19f553afdbe07f99786220aac"><td class="memItemLeft" align="right" valign="top"><a id="ae3839ad19f553afdbe07f99786220aac"></a>
+std::list&lt; std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mChildren</b></td></tr>
+<tr class="separator:ae3839ad19f553afdbe07f99786220aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a62122b6484b1b1b81410e954e5f39a82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62122b6484b1b1b81410e954e5f39a82">&#9670;&nbsp;</a></span>AddChildNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SceneNode::AddChildNode </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>pNewChildNode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a child node to this node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pNewChildNode</td><td>Pointer to the new child node to be added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if pNewChildNode is successfully added else false </dd></dl>
+
+</div>
+</div>
+<a id="a17bbbf26eeab3485bc3636abe3e576a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17bbbf26eeab3485bc3636abe3e576a1">&#9670;&nbsp;</a></span>RemoveChildNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SceneNode::RemoveChildNode </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>pChildNode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes a child node from this node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Pointer</td><td>to the child node to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if pChildNode is successfully removed else false </dd></dl>
+
+</div>
+</div>
+<a id="ae4e178792bcd5dfa05df7068f08e88d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4e178792bcd5dfa05df7068f08e88d1">&#9670;&nbsp;</a></span>SetParentNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SceneNode::SetParentNode </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>pNewParentNode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the pointer to the parent node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pNewParentNode</td><td>Pointer to the new parent node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="_scene_node_8h_source.html">SceneNode.h</a></li>
+<li>src/SceneNode.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
