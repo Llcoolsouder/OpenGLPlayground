@@ -79,8 +79,19 @@ private:
 	int mVertexSize;
 
 	/// Defines supported vertex attribute names
-	static constexpr ShaderParameter mSupportedVertexAttribs[];
+	constexpr static ShaderParameter SupportedVertexAttribs[2] = {
+		{ "aPosition", GL_FLOAT, 3, NULL, NULL },
+		{ "aColor", GL_FLOAT, 4, NULL, NULL },
+	};
 
 	/// Defines supported shader uniforms
-	static constexpr ShaderParameter mSupportedUniforms[];
+	constexpr static ShaderParameter SupportedUniforms[7] = {
+		{ "uvModelMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "uvViewMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "uvProjMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "uColor", GL_FLOAT, 4, NULL, 0 },
+		{ "ugModelMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "ugViewMatrix", GL_FLOAT, 16, NULL, 0 },
+		{ "ugProjMatrix", GL_FLOAT, 16, NULL, 0 },
+	};
 };
