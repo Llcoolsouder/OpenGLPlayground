@@ -23,7 +23,7 @@ void SceneNode::Update()
 	std::for_each(
 		mChildren.begin(),
 		mChildren.end(),
-		[&](auto pChild) { pChild->Update(); });
+		[&](std::shared_ptr<SceneNode> pChild) { pChild->Update(); });
 }
 
 //-----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ void SceneNode::Draw() const
 	std::for_each(
 		mChildren.begin(),
 		mChildren.end(),
-		[&](auto pChild) { pChild->Draw(); });
+		[&](std::shared_ptr<SceneNode> pChild) { pChild->Draw(); });
 }
 
 //-----------------------------------------------------------------------------
