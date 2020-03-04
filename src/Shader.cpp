@@ -1,5 +1,3 @@
-#include "pch.h"
-
 #include "Shader.h"
 #include "ShaderUtilities.h"
 
@@ -12,6 +10,21 @@
 
 //=============================================================================
 //=============================================================================
+static constexpr ShaderParameter Shader::mSupportedVertexAttribs[] = {
+	{ "aPosition", GL_FLOAT, 3, NULL, NULL },
+	{ "aColor", GL_FLOAT, 4, NULL, NULL },
+};
+
+static constexpr ShaderParameter Shader::mSupportedUniforms[] = {
+	{ "uvModelMatrix", GL_FLOAT, 16, NULL, 0 },
+	{ "uvViewMatrix", GL_FLOAT, 16, NULL, 0 },
+	{ "uvProjMatrix", GL_FLOAT, 16, NULL, 0 },
+	{ "uColor", GL_FLOAT, 4, NULL, 0 },
+	{ "ugModelMatrix", GL_FLOAT, 16, NULL, 0 },
+	{ "ugViewMatrix", GL_FLOAT, 16, NULL, 0 },
+	{ "ugProjMatrix", GL_FLOAT, 16, NULL, 0 },
+};
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Shader::Shader(const std::vector<std::string> &Filenames)
@@ -32,11 +45,11 @@ Shader::Shader(const std::vector<std::string> &Filenames)
 	ShaderIDs.clear();
 
 	// Get all vertex attribute locations
-	int NumSupAttribs = sizeof(SupportedVertexAttribs) / sizeof(SupportedVertexAttribs[0]);
+	constexpr int NumSupAttribs = sizeof(mSupportedVertexAttribs) / sizeof(mSupportedVertexAttribs[0]);
 	mVertexSize = 0;
 	for (int i = 0; i < NumSupAttribs; i++)
 	{
-		ShaderParameter Attrib(SupportedVertexAttribs[i]);
+		ShaderParameter Attrib(mSupportedVertexAttribs[i]);
 		Attrib.Location = glGetAttribLocation(mProgramID, Attrib.Name);
 		if (Attrib.Location != -1)
 		{
@@ -47,10 +60,10 @@ Shader::Shader(const std::vector<std::string> &Filenames)
 	}
 
 	// Get all uniforms
-	constexpr int NumSupUniforms = sizeof(SupportedUniforms) / sizeof(SupportedUniforms[0]);
+	constexpr int NumSupUniforms = sizeof(mSupportedUniforms) / sizeof(mSupportedUniforms[0]);
 	for (int i = 0; i < NumSupUniforms; i++)
 	{
-		ShaderParameter uniform(SupportedUniforms[i]);
+		ShaderParameter uniform(mSupportedUniforms[i]);
 		uniform.Location = glGetUniformLocation(mProgramID, uniform.Name);
 		if (uniform.Location != -1)
 		{
