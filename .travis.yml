@@ -21,11 +21,13 @@ addons:
     - libglfw3-dev
     - doxygen
     - lcov
+services:
+  - xvfb
 script:
 - mkdir build && cd build
 - cmake -DCODE_COVERAGE=ON ..
 - cmake --build .
-- ctest --verbose
+- xvfb-run --server-args="-screen 0 1920x1080x24" ctest --verbose
 - ../ci/codecov.sh
 - cd ..
 jobs:
