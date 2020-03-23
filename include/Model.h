@@ -6,6 +6,9 @@
  * - Mesh
  * TODO: Add uniforms to Model
  * TODO: Add textures to Model (maybe encapsulate textures and Shader under Material)
+ *
+ * @author Lonnie L. Souder II
+ * @date 12/01/19
  */
 
 #include "SceneNode.h"
@@ -18,7 +21,7 @@ class Model : public SceneNode
 {
 public:
 	/// Shorthand for uniform data needed by Model
-	typedef std::pair<std::string, std::shared_ptr<const void> > UniformData;
+	typedef std::pair<std::string, std::shared_ptr<const void>> UniformData;
 
 	Model() = delete;
 

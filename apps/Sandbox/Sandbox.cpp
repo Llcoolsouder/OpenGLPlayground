@@ -23,7 +23,19 @@
  * @author Lonnie L. Souder II
  * @date 07/31/2019
  */
-#include "pch.h"
+
+#include "OpenGLManager.h"
+#include "Window.h"
+#include "ShaderUtilities.h"
+//#include "Shader.h"
+//#include "Mesh.h"
+#include "Camera.h"
+#include "Model.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include <math.h>
 #include <algorithm>
@@ -35,70 +47,14 @@
 #include <tuple>
 #include <vector>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/transform.hpp>
-
-#include "ShaderUtilities.h"
-//#include "Shader.h"
-//#include "Mesh.h"
-#include "Camera.h"
-#include "Model.h"
-
-void cleanup()
-{
-	glfwTerminate();
-	getchar();
-}
-
-void kill()
-{
-	cleanup();
-	exit(1);
-}
-
 int main()
 {
-	GLFWwindow *window;
+	OpenGLManager* GLManager = OpenGLManager::Instance();
 
-	if (!glfwInit())
-	{
-		std::cerr << "Failed to initialize GLFW library" << std::endl;
-		kill();
-		return -1;
-	}
+	Window MainWindow(16, 9, 100);
+	MainWindow.Use();
 
-	//Window creation
-	const std::tuple<float, float> AspectRatio = std::tuple<float, float>(16.0f, 9.0f);
-	const int WindowSize = 100;
-	window = glfwCreateWindow(
-		WindowSize * std::get<0>(AspectRatio),
-		WindowSize * std::get<1>(AspectRatio),
-		"OpenGL Playground", NULL, NULL);
-	glfwMakeContextCurrent(window);
-
-	if (glewInit() != GLEW_OK)
-	{
-		std::cerr << "Failed to initialize OpenGL" << std::endl;
-		kill();
-		return -1;
-	}
-
-	if (glewIsSupported("GL_VERSION_4_3"))
-	{
-		std::cout << " Version 4.3 supported!" << std::endl;
-	}
-	else if (glewIsSupported("GL_VERSION_4_1"))
-	{
-		std::cout << "Version 4.1 supported" << std::endl;
-	}
-	else
-	{
-		std::cout << "Maybe we should update the drivers" << std::endl;
-	}
+	GLManager->InitGLEW();
 
 	glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 
@@ -109,7 +65,7 @@ int main()
 		glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 projMat = glm::perspective(
 		glm::radians(100.0f),
-		std::get<0>(AspectRatio) / std::get<1>(AspectRatio),
+		MainWindow.GetAspectRatio(),
 		0.01f,
 		1000.0f);
 	Camera mainCamera(viewMat, projMat);
@@ -159,7 +115,7 @@ int main()
 	//*****************************************************************************
 	// Main Loop
 	//*****************************************************************************
-	while (!glfwWindowShouldClose(window))
+	while (!MainWindow.WindowShouldClose())
 	{
 		FrameStart = std::chrono::system_clock::now();
 
@@ -175,14 +131,13 @@ int main()
 		glUseProgram(0);
 		glBindVertexArray(0);
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		MainWindow.SwapBuffers();
+		GLManager->PollEvents();
 
 		deltaTime = (float)(std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now() - FrameStart).count()) / 1000000000.0f;
 		//std::cout << deltaTime << std::endl;
 		uTime += deltaTime;
 	}
 
-	cleanup();
 	return 0;
 }
