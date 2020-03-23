@@ -24,17 +24,6 @@
  * @date 07/31/2019
  */
 
-#include <math.h>
-#include <algorithm>
-#include <chrono>
-#include <iostream>
-#include <memory>
-#include <random>
-#include <string>
-#include <tuple>
-#include <vector>
-
-#include <GL/glew.h>
 #include "OpenGLManager.h"
 #include "Window.h"
 #include "ShaderUtilities.h"
@@ -47,6 +36,16 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/transform.hpp>
+
+#include <math.h>
+#include <algorithm>
+#include <chrono>
+#include <iostream>
+#include <memory>
+#include <random>
+#include <string>
+#include <tuple>
+#include <vector>
 
 int main()
 {
