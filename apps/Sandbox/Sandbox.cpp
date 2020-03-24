@@ -27,8 +27,6 @@
 #include "OpenGLManager.h"
 #include "Window.h"
 #include "ShaderUtilities.h"
-//#include "Shader.h"
-//#include "Mesh.h"
 #include "Camera.h"
 #include "Model.h"
 
