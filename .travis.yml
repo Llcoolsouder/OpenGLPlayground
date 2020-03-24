@@ -5,6 +5,7 @@ sudo: required
 branches:
   only:
   - master
+  - dev
 env:
   global:
   - GH_REF="github.com/Llcoolsouder/PlaygroundEngine.git"
@@ -33,6 +34,7 @@ script:
 jobs:
   include:
   - stage: deploy_docs
+    if: branch = master
     script:
     - git checkout master
     - "./ci/build_docs.sh"
