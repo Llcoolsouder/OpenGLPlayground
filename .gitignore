@@ -5,3 +5,6 @@ docs/
 
 # CMake
 [Bb]uild/
+
+# VSCode
+.vscode/
