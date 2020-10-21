@@ -19,3 +19,6 @@ endif(PACKAGE_DEPENDENCIES)
 install(
 	TARGETS ${PROJECT_NAME}
 	DESTINATION lib)
+install(
+    FILES ${HEADER_FILES}
+    DESTINATION include)
