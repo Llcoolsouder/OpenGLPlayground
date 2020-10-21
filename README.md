@@ -1,4 +1,4 @@
-# OpenGL Playground Engine [![Build Status](https://travis-ci.org/Llcoolsouder/PlaygroundEngine.svg?branch=master)](https://travis-ci.org/Llcoolsouder/PlaygroundEngine) [![codecov](https://codecov.io/gh/Llcoolsouder/PlaygroundEngine/branch/master/graph/badge.svg)](https://codecov.io/gh/Llcoolsouder/PlaygroundEngine)
+# OpenGL Playground Engine [![Build Status](https://travis-ci.com/Llcoolsouder/PlaygroundEngine.svg?branch=master)](https://travis-ci.com/Llcoolsouder/PlaygroundEngine) [![codecov](https://codecov.io/gh/Llcoolsouder/PlaygroundEngine/branch/master/graph/badge.svg)](https://codecov.io/gh/Llcoolsouder/PlaygroundEngine)
 
 # Table of Contents
 1. [Description](#description)
