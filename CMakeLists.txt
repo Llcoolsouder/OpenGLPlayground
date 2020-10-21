@@ -2,23 +2,12 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 set (CMAKE_CXX_STANDARD 17)
 project(PlaygroundEngine)
 
-# Code Coverage Configuration
-add_library(coverage_config INTERFACE)
+# Find external libraries
+set(CMAKE_MODULE_PATH
+	${CMAKE_MODULE_PATH}
+	"${CMAKE_SOURCE_DIR}/cmake/")
 
-option(CODE_COVERAGE "Enable coverage reporting" OFF)
-if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-  # Add required flags (GCC & LLVM/Clang)
-  target_compile_options(coverage_config INTERFACE
-    -O0        # no optimization
-    -g         # generate debug info
-    --coverage # sets all required flags
-  )
-  if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
-    target_link_options(coverage_config INTERFACE --coverage)
-  else()
-    target_link_libraries(coverage_config INTERFACE --coverage)
-  endif()
-endif(CODE_COVERAGE)
+include(CodeCov-config)
 
 # Build engine library
 # Add files
@@ -61,16 +50,12 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 		${HEADER_FILES})
 	# source_group("Shaders" REGULAR_EXPRESSION "[vert,geom,frag,comp]$")
 
+	set(GLEW_VERBOSE TRUE)
 	set(GLEW_USE_STATIC_LIBS TRUE)
-	ADD_DEFINITIONS(-DGLEW_STATIC )
+	ADD_DEFINITIONS(-DGLEW_STATIC)
 
 	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew")
 endif()
-
-# Find external libraries
-set(CMAKE_MODULE_PATH
-	${CMAKE_MODULE_PATH}
-	"${CMAKE_SOURCE_DIR}/cmake/")
 
 find_package(OpenGL REQUIRED OpenGL)
 
@@ -92,7 +77,7 @@ set(LIBS
 	OpenGL::GL
 	${GLFW3_LIBRARY}
 	GLEW::GLEW
-  coverage_config)
+  	coverage_config)
 target_link_libraries(
 	${PROJECT_NAME}
 	${LIBS})
@@ -120,14 +105,6 @@ if (BUILD_TESTING AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
   add_subdirectory(tests)
 endif()
 
-install(
-	TARGETS ${PROJECT_NAME}
-	DESTINATION bin)
+include(Install-config)
 
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-set(CPACK_PACKAGE_VENDOR "LLCoolSouder")
-set(CPACK_VERBATIM_VARIABLES true)
-set(CPACK_PACKAGE_VERSION_MAJOR 0)
-set(CPACK_PACKAGE_VERSION_MINOR 1)
-set(CPACK_PACKAGE_VERSION_PATCH 0)
-include(CPack)
+include(CPack-config)
