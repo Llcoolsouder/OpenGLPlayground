@@ -1,7 +1,6 @@
 language: cpp
 os: linux
 dist: bionic
-sudo: required
 branches:
   only:
   - master
@@ -33,7 +32,7 @@ script:
 jobs:
   include:
   - stage: deploy_docs
-    if: branch = master
+    if: branch = master AND type != pull_request
     script:
     - git checkout master
     - "./ci/build_docs.sh"
