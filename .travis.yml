@@ -1,6 +1,6 @@
 language: cpp
 os: linux
-dist: trusty
+dist: bionic
 branches:
   only:
   - master
@@ -23,7 +23,7 @@ addons:
 services:
   - xvfb
 script:
-- mkdir build && cd build && cmake --version
+- mkdir build && cd build
 - cmake -DCODE_COVERAGE=ON -DPACKAGE_DEPENDENCIES=ON ..
 - cmake --build .
 - cmake --build . --target package
