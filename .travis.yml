@@ -24,9 +24,9 @@ services:
   - xvfb
 script:
 - mkdir build && cd build
-- cmake -DCODE_COVERAGE=ON ..
+- cmake -DCODE_COVERAGE=ON -DPACKAGE_DEPENDENCIES=ON ..
 - cmake --build .
-- cmake --build . --target PACKAGE
+- cmake --build . --target package
 - tar -tvf PlaygroundEngine*.tar.gz
 - xvfb-run -a ctest --verbose
 - ../ci/codecov.sh
