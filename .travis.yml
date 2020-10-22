@@ -12,6 +12,8 @@ env:
 compiler:
 - gcc
 - clang
+install:
+- sudo apt remove --purge --auto-remove cmake
 addons:
   apt:
     packages:
