@@ -3,8 +3,7 @@ set (CMAKE_CXX_STANDARD 17)
 project(PlaygroundEngine)
 
 # Find external libraries
-set(CMAKE_MODULE_PATH
-	${CMAKE_MODULE_PATH}
+list(APPEND CMAKE_MODULE_PATH
 	"${CMAKE_SOURCE_DIR}/cmake/")
 
 include(CodeCov-config)
@@ -14,7 +13,7 @@ include(CodeCov-config)
 file(GLOB
 	SOURCE_FILES
 	${CMAKE_SOURCE_DIR}/src/*.cpp)
-file(GLOB_RECURSE
+file(GLOB
 	HEADER_FILES
 	${CMAKE_SOURCE_DIR}/include/*.h)
 
