@@ -26,6 +26,8 @@ script:
 - mkdir build && cd build
 - cmake -DCODE_COVERAGE=ON ..
 - cmake --build .
+- cmake --build . --target PACKAGE
+- tar -tvf PlaygroundEngine*.tar.gz
 - xvfb-run -a ctest --verbose
 - ../ci/codecov.sh
 - cd ..
