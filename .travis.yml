@@ -20,15 +20,11 @@ addons:
     - libglfw3-dev
     - doxygen
     - lcov
-  snaps:
-  - name: cmake
-    confinement: classic
-    channel: latest/stable
 services:
   - xvfb
 script:
 - mkdir build && cd build
-- cmake --version && cmake -DCODE_COVERAGE=ON -DPACKAGE_DEPENDENCIES=ON ..
+- cmake -DCODE_COVERAGE=ON -DPACKAGE_DEPENDENCIES=ON ..
 - cmake --build .
 - cmake --build . --target package
 - tar -tvf PlaygroundEngine*.tar.gz
