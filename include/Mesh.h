@@ -25,8 +25,8 @@ public:
 	Mesh(const Mesh &other) = delete;
 
 	/**
-   * Creates a mesh with one interleaved vertex buffer
-   */
+     * Creates a mesh with one interleaved vertex buffer
+     */
 	Mesh(
 		std::vector<glm::vec3> aPositions,
 		std::vector<unsigned int> Indices,
@@ -34,18 +34,18 @@ public:
 		GLenum DrawMode = GL_TRIANGLES);
 
 	/**
-   * Destroys all buffer objects in this mesh
-   */
+     * Destroys all buffer objects in this mesh
+     */
 	~Mesh();
 
 	/**
-   * Binds the mesh buffers to the context
-   */
+     * Binds the mesh buffers to the context
+     */
 	void Bind() const;
 
 	/**
-   * Draws the mesh using the currently bound shader
-   */
+     * Draws the mesh using the currently bound shader
+     */
 	void Draw() const;
 
 private:

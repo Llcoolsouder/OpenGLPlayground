@@ -26,30 +26,30 @@ public:
 	Model() = delete;
 
 	/**
-   * Makes a copy of another Model
-   */
+     * Makes a copy of another Model
+     */
 	Model(const Model &other);
 
 	/**
-   * Creates a model with the given mesh and shader program
-   */
+     * Creates a model with the given mesh and shader program
+     */
 	Model(const std::shared_ptr<Mesh> pMesh,
 		const std::shared_ptr<Shader> pShader,
 		const std::vector<UniformData> Uniforms = {});
 
 	/**
-   * Releases shared pointers to data
-   */
+     * Releases shared pointers to data
+     */
 	~Model();
 
 	/**
-   * Sets all of the necessary uniforms
-   */
+     * Sets all of the necessary uniforms
+     */
 	virtual void Update() override;
 
 	/**
-   * Draws mpMesh using mpShader
-   */
+     * Draws mpMesh using mpShader
+     */
 	virtual void Draw() const override;
 
 private:

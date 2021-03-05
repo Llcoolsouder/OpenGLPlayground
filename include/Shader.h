@@ -1,4 +1,4 @@
-/**
+  /**
  * @file Shader.h
  *
  * Describes a class that handles shaders
@@ -22,40 +22,40 @@ public:
 	Shader(const Shader &other) = delete;
 
 	/**
-   * Loads, compiles, and links a shader program
-   * from the files given by Filenames
-   *
-   * @param Filenames Paths to GLSL shader files
-   */
+     * Loads, compiles, and links a shader program
+     * from the files given by Filenames
+     *
+     * @param Filenames Paths to GLSL shader files
+     */
 	Shader(const std::vector<std::string> &Filenames);
 
 	/**
-   * Deletes the program
-   */
+     * Deletes the program
+     */
 	~Shader();
 
 	/**
-   * Binds shader program to context
-   */
+     * Binds shader program to context
+     */
 	void Use();
 
 	/**
-   * Sets a uniform to a given value
-   *
-   * @param name Name of the uniform from shader source
-   * @param data Pointer to data
-   *
-   * @return true if successful, else false
-   */
+     * Sets a uniform to a given value
+     *
+     * @param name Name of the uniform from shader source
+     * @param data Pointer to data
+     *
+     * @return true if successful, else false
+     */
 	bool SetUniform(const std::string &name, const void *data);
 
 	/**
-   * Sets all vertex attribute pointers to their places
-   * in the currently bound vertex buffer. This assumes that
-   * the currently bound buffer is an interleaved buffer
-   * containing ALL of the attributes specified in this shader.
-   * NOTE: This MUST be called after a new buffer is bound.
-   */
+     * Sets all vertex attribute pointers to their places
+     * in the currently bound vertex buffer. This assumes that
+     * the currently bound buffer is an interleaved buffer
+     * containing ALL of the attributes specified in this shader.
+     * NOTE: This MUST be called after a new buffer is bound.
+     */
 	void SetAllVertexAttribPointers();
 
 private:

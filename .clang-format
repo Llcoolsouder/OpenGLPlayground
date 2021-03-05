@@ -47,7 +47,7 @@ BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon
 # BreakStringLiterals: true
 ColumnLimit:     0
-# CommentPragmas:  '^ IWYU pragma:'
+CommentPragmas:  '^[^ ]'
 # CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 8
