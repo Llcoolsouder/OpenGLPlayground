@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 set (CMAKE_CXX_STANDARD 17)
 project(PlaygroundEngine)
 
@@ -53,34 +53,22 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	set(GLEW_VERBOSE TRUE)
 	set(GLEW_USE_STATIC_LIBS TRUE)
 	ADD_DEFINITIONS(-DGLEW_STATIC)
-
 	list(APPEND CMAKE_PREFIX_PATH "C:/thirdparty/glew")
 endif()
 
 find_package(OpenGL REQUIRED OpenGL)
-
-find_package(GLM REQUIRED)
-message(STATUS
-	"GLM included at ${GLM_INCLUDE_DIR}")
-
-find_package(GLFW3 REQUIRED)
-message(STATUS
-	"GLFW3 included at ${GLFW3_INCLUDE_DIR}")
-
-set(GLEW_VERBOSE TRUE)
 find_package(GLEW REQUIRED)
-message(STATUS
-	"GLEW included at ${GLEW_INCLUDE_DIR}")
+add_subdirectory(submodules/glm)
+add_subdirectory(submodules/glfw)
 
-# Link libraries
-set(LIBS
-	OpenGL::GL
-	${GLFW3_LIBRARY}
-	GLEW::GLEW
-  	coverage_config)
 target_link_libraries(
 	${PROJECT_NAME}
-	${LIBS})
+	PUBLIC
+	OpenGL::GL
+	glfw
+	GLEW::glew_s
+	glm
+  	coverage_config)
 
 # Define include directories
 set(ADDITIONAL_INCLUDES
@@ -90,7 +78,6 @@ set(ADDITIONAL_INCLUDES
 target_include_directories(
 	${PROJECT_NAME}
 	PUBLIC
-	"${CMAKE_SOURCE_DIR}/src"
 	"${CMAKE_SOURCE_DIR}/include"
 	${ADDITIONAL_INCLUDES})
 	
