@@ -100,9 +100,9 @@ bool Shader::SetUniform(const std::string &name, const void *data)
 				glUseProgram(0);
 				return false;
 			}
-				glUseProgram(0);
-				return true;
 		}
+		glUseProgram(0);
+		return true;
 	}
 	else
 	{

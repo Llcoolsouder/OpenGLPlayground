@@ -29,6 +29,7 @@
 #include "ShaderUtilities.h"
 #include "Camera.h"
 #include "Model.h"
+#include "PrimitiveGenerator.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -68,16 +69,7 @@ int main()
 		1000.0f);
 	Camera mainCamera(viewMat, projMat);
 
-	// Create Mesh
-	std::vector<glm::vec3> vertices = { { -0.5f, -0.5f, 0.0f },
-		{ 0.5f, -0.5f, 0.0f },
-		{ 0.0f, 0.5f, 0.0f } };
-
-	std::vector<unsigned int> indices = {
-		0, 1, 2
-	};
-
-	std::shared_ptr<Mesh> pTriangleMesh = std::make_shared<Mesh>(vertices, indices);
+	std::shared_ptr<Mesh> pTriangleMesh = LSPrimitiveGenerator::Triangle();
 
 	// Create shader program
 	const std::string ShaderFolder = "../../../shaders/";

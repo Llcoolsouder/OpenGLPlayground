@@ -9,8 +9,8 @@
  */
 #pragma once
 
-#include <glm/glm.hpp>
-#include <vector>
+#include "Mesh.h"
+#include <memory>
 
 /**
  * Contains a set of functions used to generate vertex arrays
@@ -18,5 +18,12 @@
  */
 namespace LSPrimitiveGenerator
 {
+
+    /**
+     * @brief Generates a triangle that fits in a 1x1 square centered about the origin
+     * 
+     * @return Mesh 
+     */
+    std::shared_ptr<Mesh> Triangle();
 
 }
